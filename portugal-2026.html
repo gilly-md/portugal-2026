@@ -135,6 +135,8 @@
   .pick-b{margin:4px 0 0;font-size:.94rem;}
   .rate{font-size:.74rem;font-weight:700;color:var(--verde);white-space:nowrap;}
   .rate .ct{color:var(--ink-soft);font-weight:500;}
+  .book{font-size:.74rem;font-weight:700;color:var(--azul-deep);white-space:nowrap;}
+  .book .ct{color:var(--ink-soft);font-weight:500;}
   .tier{font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;border-radius:999px;padding:2px 8px;}
   .tier.value{color:#4d5733;background:rgba(95,122,72,.16);}
   .tier.splurge{color:var(--port);background:rgba(123,47,58,.12);}
@@ -165,6 +167,21 @@
   .wx-day .base{font-size:.58rem;color:var(--ink-soft);opacity:.85;margin-top:1px;}
   .wx-loading{background:var(--paper);border:1px dashed rgba(27,79,138,.3);border-radius:12px;padding:26px;text-align:center;color:var(--ink-soft);font-size:.92rem;}
   .wx-status{margin-top:10px;font-size:.76rem;color:var(--ink-soft);}
+  /* today / hourly strip — sits above the daily strip */
+  .wx-today{margin-bottom:16px;}
+  .wx-today-h{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:8px;}
+  .wx-hours{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;}
+  .wx-now{flex:none;background:linear-gradient(135deg,var(--azul),var(--azul-deep));color:#fdf6e9;border-radius:14px;padding:12px 16px;min-width:124px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 10px 24px -16px rgba(18,58,102,.6);}
+  .wx-now .now-t{font-family:"DM Serif Display",serif;font-size:1.85rem;line-height:1;}
+  .wx-now .now-l{font-size:.72rem;opacity:.92;margin-top:5px;}
+  .wx-hr{flex:none;scroll-snap-align:start;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:9px;text-align:center;min-width:58px;display:flex;flex-direction:column;align-items:center;gap:2px;}
+  .wx-hr .h{font-size:.64rem;color:var(--ink-soft);font-weight:700;}
+  .wx-hr .e{font-size:1.1rem;line-height:1;}
+  .wx-hr .t{font-weight:700;font-size:.84rem;}
+  .wx-hr .r{font-size:.58rem;color:var(--azul-deep);}
+  .wx-swipe{display:none;font-size:.6rem;letter-spacing:.04em;color:var(--azul-deep);background:rgba(27,79,138,.1);border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:middle;}
+  @media(max-width:720px){ .wx-swipe{display:inline-block;animation:nudge 1.6s ease-in-out infinite;} }
+  @keyframes nudge{0%,100%{transform:translateX(0);}50%{transform:translateX(3px);}}
 
   /* ---------- WEEK TABLE ---------- */
   .skeleton{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin-top:14px;}
@@ -174,6 +191,39 @@
   tbody tr:nth-child(even){background:rgba(95,122,72,.05);}
   td .base{font-weight:600;color:var(--azul-deep);}
   td .nts{white-space:nowrap;font-weight:700;color:var(--port);}
+
+  /* ---------- FLIGHT TRACKER ---------- */
+  .countdown{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--azul);background-image:var(--strip);background-size:30px 30px;border-radius:14px;padding:4px;box-shadow:var(--shadow);margin-top:14px;}
+  .countdown-inner{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:14px;background:var(--paper);border-radius:11px;padding:16px 20px;}
+  .cd-lead{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;flex:1 1 100%;}
+  .cd-units{display:flex;gap:10px;flex-wrap:wrap;}
+  .cd-unit{text-align:center;min-width:62px;}
+  .cd-unit .num{font-family:"DM Serif Display",serif;font-size:2rem;line-height:1;color:var(--azul-deep);}
+  .cd-unit .u{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-top:4px;}
+  .cd-tail{font-size:.84rem;color:var(--ink-soft);flex:1 1 auto;}
+  .cd-tail b{color:var(--terra-deep);}
+  .cd-arrived{font-family:"DM Serif Display",serif;font-size:1.4rem;color:var(--azul-deep);padding:6px 0;}
+
+  .leg-group{margin-top:14px;}
+  .leg-group-h{display:flex;align-items:center;gap:9px;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-deep);font-weight:700;margin:18px 0 8px;}
+  .leg-group-h .dir{font-size:1.05rem;line-height:1;}
+  .leg{background:var(--paper);border-radius:14px;margin-top:10px;box-shadow:0 0 0 2px var(--line),var(--shadow);overflow:hidden;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:16px 18px;animation:rise .6s both;}
+  .leg:hover{box-shadow:0 0 0 2px rgba(27,79,138,.34),var(--shadow);}
+  .leg .who{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-family:"DM Serif Display",serif;font-size:1.4rem;color:#fff;background:linear-gradient(135deg,var(--azul),var(--azul-deep));box-shadow:0 0 0 1px rgba(27,79,138,.22) inset;}
+  .leg-main{min-width:0;}
+  .leg-no{font-family:"DM Serif Display",serif;font-size:1.3rem;color:var(--azul-deep);line-height:1.1;}
+  .leg-no .air{font-family:"Hanken Grotesk",sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-left:7px;}
+  .leg-route{font-size:.92rem;color:var(--ink);margin-top:3px;}
+  .leg-route .arrow{color:var(--terra);font-weight:700;padding:0 3px;}
+  .leg-meta{font-size:.8rem;color:var(--ink-soft);margin-top:3px;}
+  .leg-meta b{color:var(--ink);font-weight:700;}
+  .leg-meta .cs{font-style:italic;}
+  .leg-actions{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+  .track-btn{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--terra),var(--terra-deep));border-radius:999px;padding:8px 15px;text-decoration:none;box-shadow:0 8px 18px -10px rgba(176,74,50,.7);transition:transform .2s,box-shadow .2s;white-space:nowrap;}
+  .track-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px -10px rgba(176,74,50,.8);}
+  .fa-link{font-size:.74rem;font-weight:600;color:var(--azul-deep);text-decoration:none;border-bottom:1px solid rgba(22,68,99,.35);padding-bottom:1px;}
+  .fa-link:hover{color:var(--terra-deep);border-color:var(--terra-deep);}
+  .leg-note{font-size:.8rem;color:var(--ink-soft);margin:10px 0 0;font-style:italic;}
 
   /* ---------- RECAP CARDS (your brief) ---------- */
   .qs{display:grid;gap:12px;}
@@ -199,6 +249,8 @@
     .panel{padding:34px 24px 30px;}
     .card-top{grid-template-columns:auto 1fr;}
     .card-toggle{grid-column:1 / -1;justify-self:end;margin-top:-8px;}
+    .leg{grid-template-columns:auto 1fr;}
+    .leg-actions{grid-column:1 / -1;flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;margin-top:2px;}
   }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;}}
 </style>
@@ -240,6 +292,7 @@
 
   <!-- WEATHER -->
   <section class="sec-head"><span class="gem"></span><h2>Weather watch</h2><span class="rule"></span><span class="count">live · your dates</span></section>
+  <div class="wx-today" id="wx-today"></div>
   <div id="wx" class="wx-loading">Loading live forecast…</div>
   <div class="wx-status" id="wx-status" hidden></div>
 
@@ -248,6 +301,19 @@
   <p class="sec-intro">Two to three options per base, tiered <b>value</b> vs <b>splurge</b> — each with its real Google rating, an indicative price, the vibe, and the honest tradeoff. Pick the one that feels like you for each base and tell Wilma; that locks the day-by-day.</p>
   <p class="disclaimer">⚑ <b>Prices are indicative for late-June peak</b> — a snapshot to compare on, not a quote. We confirm the live price for your exact dates before you book.</p>
   <div id="stays"></div>
+
+  <!-- FLIGHT TRACKER -->
+  <section class="sec-head"><span class="gem"></span><h2>Flight tracker</h2><span class="rule"></span><span class="count">live status · by flight no.</span></section>
+  <p class="sec-intro">The four booked legs, with a <b>live-status link</b> for each and a countdown to the first wheels-down in Lisbon. Tap <b>Track live</b> on the day — the status appears once the airline loads the flight.</p>
+  <div class="countdown" id="countdown" aria-live="polite">
+    <div class="countdown-inner" id="cd-inner">
+      <div class="cd-lead">Counting down to Lisbon</div>
+      <div class="cd-units" id="cd-units"></div>
+      <div class="cd-tail">until the first wheels-down — <b>E arrives Tue 24 Jun</b></div>
+    </div>
+  </div>
+  <div id="flights"></div>
+  <p class="leg-note">Live status appears ~24h before each flight. <b>E's outbound arrival (17:55) is to be reconfirmed with the airline</b> — the booking sheet was ambiguous.</p>
 
   <!-- WEEK -->
   <section class="sec-head"><span class="gem"></span><h2>The shape of the week</h2><span class="rule"></span><span class="count">flights fixed · nights flexible</span></section>
@@ -309,62 +375,62 @@ const pin = "📍";
 const stays = [
   { city:"Porto", emoji:"🏰", sub:"24–27 June · 3 nights · riverside · the heart of the trip",
     options:[
-      { name:"Gran Cruz House", rate:"4.7", ct:"147", price:"~€250–400/nt", tier:"value", top:true,
-        vibe:`Value &amp; intimate — and the closest fit to your €250 + seclusion brief.`,
-        blurb:`Ribeira riverfront with just <b>7 rooms</b>, owned by a Port-wine house; some rooms have river views. Small, personal, and right in the old town.`,
-        tradeoff:`Tiny boutique — books out fast, so we'd confirm early.`, q:"Gran Cruz House Porto" },
-      { name:"Pestana Vintage Porto", rate:"4.7", ct:"2801", price:"~€300–450/nt", tier:"historic",
-        vibe:`Historic heart, on the most famous square in Porto.`,
-        blurb:`Right on <b>Ribeira Square</b>, with Douro-view rooms (some with bathtubs over the river). The postcard-Porto location.`,
-        tradeoff:`Busy tourist hub; a big hotel, so less intimate than the boutiques.`, q:"Pestana Vintage Porto Ribeira" },
-      { name:"The Rebello, Hotel &amp; Spa", rate:"4.7", ct:"655", price:"~€350–550/nt", tier:"splurge",
-        vibe:`Splurge &amp; wow — the design-hotel showstopper.`,
-        blurb:`Gaia's waterfront, a Small Luxury Hotel: rooftop bar &amp; spa, <b>panoramic Douro &amp; Dom Luís bridge views</b>, big design suites in restored riverside buildings.`,
-        tradeoff:`Over the €250 budget; across the river in Gaia — a bridge walk from the old town.`, q:"The Rebello Hotel Spa Vila Nova de Gaia" },
+      { name:"The Rebello, Hotel &amp; Spa", rate:"4.7", ct:"655", book:"9.4", bookCt:"1802", price:"~€350–550/nt", tier:"splurge", top:true,
+        vibe:`Her pick — and the benchmark for the whole trip.`,
+        blurb:`Gaia's waterfront, a Small Luxury Hotel: rooftop bar &amp; spa, <b>panoramic Douro &amp; Dom Luís bridge views</b>, and large design suites in restored riverside buildings.`,
+        tradeoff:`Across the river in Gaia — a short bridge walk to the old town.`, q:"The Rebello Hotel Spa Vila Nova de Gaia" },
+      { name:"Torel 1884 Suites &amp; Apartments", rate:"4.8", ct:"359", book:"9.4", bookCt:"815", price:"~€300–450/nt", tier:"splurge",
+        vibe:`A city-heart alternative — same luxury tier, different setting.`,
+        blurb:`A polished boutique in an 1800s building, with suites and apartments, in the <b>downtown heart</b> (Mouzinho da Silveira).`,
+        tradeoff:`Downtown, <b>not riverfront</b> — doesn't have Rebello's river view.`, q:"Torel 1884 Suites Apartments Porto" },
+      { name:"Torel Saboaria", rate:"4.9", ct:"245", book:"9.6", bookCt:"1623", price:"~€300–450/nt", tier:"splurge",
+        vibe:`Five-star design-luxury in a restored soap factory — Torel's newest Porto address.`,
+        blurb:`A polished 5-star in central Porto (Bonjardim, by the <b>Bolhão</b> market): stylish rooms, a <b>spa</b>, and an acclaimed restaurant, in a former soap factory.`,
+        tradeoff:`Central but <b>not riverfront</b> — no river view; its draw is the spa &amp; design.`, q:"Torel Saboaria Porto" },
     ],
-    bnb:`Apartment route — a river-facing <b>Ribeira / Cais de Gaia penthouse with a terrace</b> runs around €250 and gives you space + privacy with the bridge view.` },
+    bnb:`Rather an apartment than a hotel? <b>Browse Airbnb</b> for a river-facing flat with a terrace in <b>Ribeira</b> or <b>Cais de Gaia</b> — <a class="maplink" target="_blank" rel="noopener" href="https://www.airbnb.com/s/Ribeira--Porto--Portugal/homes">open Porto on Airbnb →</a>` },
 
   { city:"Douro Valley", emoji:"🍇", sub:"27–29 June · 2 nights · vineyards · river-gorge country",
+    intro:`Each of these sits on the <b>terraced river gorge</b> with a winery on-site — the river view is a given here, unlike the earlier Vinho-Verde pick.`,
     options:[
-      { name:"Quinta de Santa Marinha", rate:"4.9", ct:"94", price:"~€200–280/nt (by enquiry)", tier:"value", top:true,
-        vibe:`Our top pick — best fit for your whole brief (seclusion + river views + rustic + winery).`,
-        blurb:`Castedo do Douro / Alijó, <b>on the terraced river gorge near Pinhão</b>. A secluded 5-room family quinta with a suspended valley pool, on-site wine tourism (vineyard walks, even make-your-own-wine), and home-cooked terrace dinners. The <b>Suite</b> = King + valley view.`,
-        tradeoff:`A homestay feel — no spa, remote winding access, home-cooking not fine-dining. Price by enquiry; we confirm direct.`, q:"Quinta de Santa Marinha Alijo Douro" },
-      { name:"Quinta da Côrte", rate:"4.8", ct:"158", price:"~€280–420/nt", tier:"splurge",
-        vibe:`Polished &amp; intimate — a design-hotel take on the quinta.`,
-        blurb:`Tabuaço, intimate, with a <b>valley-view pool</b> and a more designed, hotel-like finish.`,
-        tradeoff:`Pricier, and more design-hotel than family-quinta if it's warmth you're after.`, q:"Quinta da Corte Tabuaco Douro" },
-      { name:"Casa do Rio — Quinta do Vallado", rate:"4.9", ct:"238", price:"~€250–400/nt", tier:"splurge",
-        vibe:`Architectural escape with an infinity pool over the river.`,
-        blurb:`8 suites and an <b>infinity pool over the river</b>, from a respected wine estate.`,
-        tradeoff:`Further east (Foz Côa) — more driving to and from your other days.`, q:"Casa do Rio Quinta do Vallado Douro" },
-      { name:"Monverde — Wine Experience Hotel", rate:"4.7", ct:"1572", price:"~€300+/nt", tier:"historic",
-        vibe:`Full wine-hotel with spa &amp; two pools — service over scenery.`,
-        blurb:`A vineyard wine-hotel with spa and two pools. <b>⚑ Flag:</b> it's in <b>Vinho Verde country (Telões), ~45 min from the iconic terraced river gorge</b> — there's no postcard river view from the room. Keep only if you'd trade the river view for spa + full hotel service.`,
-        tradeoff:`The river-gorge view — the thing you said is a must — isn't here.`, q:"Monverde Wine Experience Hotel" },
+      { name:"Quinta de Santa Marinha", rate:"4.9", ct:"94", book:"9.5", bookCt:"382", price:"Suite ~€200–280/nt (by enquiry)", tier:"value", top:true,
+        vibe:`Her top pick — a secluded family quinta right on the terraced gorge near Pinhão.`,
+        blurb:`Castedo do Douro / Alijó: a 5-room wine quinta with a <b>suspended valley pool</b>, on-site wine tourism (vineyard walks, even make-your-own-wine) and home-cooked terrace dinners. Book the <b>Suite</b> — 1 King + 1 sofa bed + desk, hosts 3.`,
+        tradeoff:`A homestay feel — no spa, remote winding access, home-cooking not fine dining; price by enquiry, confirm direct.`, q:"Quinta de Santa Marinha Alijo Douro" },
+      { name:"Casa do Rio — Quinta do Vallado", rate:"4.9", ct:"238", book:"9.6", bookCt:"231", price:"~€250–400/nt", tier:"value",
+        vibe:`Best all-round fit — river views, infinity pool, wine on the doorstep.`,
+        blurb:`Vila Nova de Foz Côa: 6 rooms + 2 suites with <b>Douro-river views</b>, an infinity pool, and an on-site wine estate (tastings, hikes, kayaking, show-cooking). Couples rate it <b>9.7</b>.`,
+        tradeoff:`Further east (Foz Côa) — a bit more driving to and from your other days.`, q:"Casa do Rio Quinta do Vallado Douro" },
+      { name:"Quinta da Côrte", rate:"4.8", ct:"158", book:"9.3", bookCt:"537", price:"~€280–420/nt", tier:"value",
+        vibe:`Intimate vineyard quinta with magnificent valley views.`,
+        blurb:`Valença do Douro: an intimate 8-room wine estate with an <b>infinity pool over the valley</b>, communal rustic-Portuguese dining, and an on-site winery.`,
+        tradeoff:`The access road is steep, narrow and winding; dinner is good-not-great for the price.`, q:"Quinta da Corte Valenca do Douro" },
+      { name:"Six Senses Douro Valley", rate:"4.9", ct:"1818", book:"9.5", bookCt:"435", price:"~€650–900+/nt", tier:"splurge",
+        vibe:`The big-celebration splurge — the valley's top luxury.`,
+        blurb:`Lamego: a 19th-century manor with an <b>award-winning spa</b>, fine dining, and curated wine tours — the #1 hotel in its area.`,
+        tradeoff:`By far the priciest; value-for-money scores lower (8.4) to match.`, q:"Six Senses Douro Valley Lamego" },
     ],
-    splurge:`Big-celebration option: <b>Six Senses Douro Valley</b> ★4.9 (1818), ~€700+/nt — a restored manor with an award-winning spa and fine dining near Régua.`,
-    bnb:`Prefer a private cottage? Look near <b>Pinhão or Peso da Régua</b> for a working wine estate renting a suite with a valley view and pool.` },
+    bnb:`Prefer self-catering? <b>Browse Airbnb</b> for a quinta cottage near <b>Pinhão / Peso da Régua</b> with a valley view and pool — <a class="maplink" target="_blank" rel="noopener" href="https://www.airbnb.com/s/Douro-Valley--Portugal/homes">open the Douro on Airbnb →</a>` },
 
   { city:"Lisbon", emoji:"🌉", sub:"29–30 June · 1 functional night · airport-side bookend",
     note:`Just one airport-side night before E's 07:10 flight (both options ~15 min from the airport). H has a full last day on the 30th — so we'll ask the stay for <b>late checkout / luggage storage</b>.`,
     options:[
-      { name:"Memmo Alfama", rate:"4.6", ct:"991", price:"~€300–450/nt", tier:"value", top:true,
+      { name:"Memmo Alfama", rate:"4.6", ct:"991", book:"9.3", bookCt:"1006", price:"~€300–450/nt", tier:"value", top:true,
         vibe:`Alfama soul and one of the best sunset spots in the city.`,
         blurb:`Intimate boutique in the heart of <b>Alfama</b>, with a rooftop pool/bar over the river.`,
         tradeoff:`Alfama's lanes are steep and stepped — charming, but not the easiest with luggage.`, q:"Memmo Alfama Lisbon" },
-      { name:"Verride Palácio Santa Catarina", rate:"4.6", ct:"379", price:"~€450–700/nt", tier:"splurge",
+      { name:"Verride Palácio Santa Catarina", rate:"4.6", ct:"379", book:"9.1", bookCt:"238", price:"~€450–700/nt", tier:"splurge",
         vibe:`Genuine wow — a palace finish to the trip.`,
         blurb:`An 18th-c palace with a <b>rooftop pool and sweeping Tagus views</b> — ornate and sophisticated.`,
         tradeoff:`A big splurge for a single functional night before an early flight.`, q:"Verride Palacio Santa Catarina Lisbon" },
     ],
-    bnb:`Apartment route: <b>Príncipe Real</b> for rooftop-terrace flats over the river; <b>Alfama</b> for 18th-c character.` },
+    bnb:`Rather an apartment? <b>Príncipe Real</b> for rooftop-terrace flats over the river, <b>Alfama</b> for 18th-c character — <a class="maplink" target="_blank" rel="noopener" href="https://www.airbnb.com/s/Alfama--Lisbon--Portugal/homes">open Lisbon on Airbnb →</a>` },
 ];
 
 const recap = [
   { q:`Romantic means…`, hint:`Seclusion &amp; privacy · adventure together · sunsets &amp; views · great wine &amp; food. <b>Romantic views a must.</b>` },
   { q:`Pace`, hint:`Slow &amp; unhurried.` },
-  { q:`Stays`, hint:`A mix of hotels &amp; apartments, per place. Comfortable around <b>€250/night</b>.` },
+  { q:`Stays`, hint:`Polished, special places with a view — <b>The Rebello is the benchmark.</b>` },
   { q:`Wine &amp; food`, hint:`A proper winery day, and rustic local tascas.` },
   { q:`Days look like`, hint:`Walking tours · hiking &amp; nature · café-wandering · a beach day.` },
   { q:`Getting around`, hint:`Happy to drive — and to push on to Porto the arrival night.` },
@@ -386,6 +452,7 @@ const optRow = o=>`
       <b>${o.name}</b>
       <span class="tier ${o.tier}">${TIER[o.tier]||""}</span>
       <span class="rate">★ ${o.rate} <span class="ct">(${o.ct})</span></span>
+      <span class="book">Booking ${o.book} <span class="ct">(${o.bookCt})</span></span>
       <span class="price">${o.price}</span>
     </div>
     <p class="pick-b"><b>${o.vibe}</b> ${o.blurb}</p>
@@ -398,7 +465,9 @@ stays.forEach((s,i)=>{
   el.className="card"; el.style.animationDelay=(0.05+i*0.05)+"s";
   const rows = s.options.map(optRow).join("");
   const noteBlock = s.note ? `<div class="block"><div class="ico alt">✈️</div><div><div class="label">Good to know</div><p>${s.note}</p></div></div>` : "";
+  const introBlock = s.intro ? `<div class="block"><div class="ico alt">🌄</div><div><div class="label">All on the river gorge</div><p>${s.intro}</p></div></div>` : "";
   const splurgeBlock = s.splurge ? `<div class="block"><div class="ico pick">✦</div><div><div class="label">If it's a big celebration</div><p>${s.splurge}</p></div></div>` : "";
+  const bnbBlock = s.bnb ? `<div class="block"><div class="ico bnb">🏠</div><div><div class="label">Prefer an apartment?</div><p>${s.bnb}</p></div></div>` : "";
   el.innerHTML=`
     <div class="card-top" role="button" tabindex="0" aria-expanded="false" aria-controls="s${i}" aria-label="${s.city} — see stay options">
       <div class="badge" aria-hidden="true">${s.emoji}</div>
@@ -407,13 +476,12 @@ stays.forEach((s,i)=>{
     </div>
     <div class="detail-wrap" id="s${i}"><div class="detail"><div class="detail-inner">
       ${noteBlock}
+      ${introBlock}
       <div class="block"><div class="ico pick">★</div><div>
         <div class="label">The options</div>${rows}
       </div></div>
       ${splurgeBlock}
-      <div class="block"><div class="ico bnb">🏠</div><div>
-        <div class="label">Prefer an apartment?</div><p>${s.bnb}</p>
-      </div></div>
+      ${bnbBlock}
       <div class="choose">
         <span class="ht" aria-hidden="true">♡</span>
         <div>Found the one for <b>${s.city}</b>? Mark it <span class="istag">♡ This is us</span> and <b>tell Wilma your pick</b> — reply with your choice for each base and we'll lock it in.</div>
@@ -431,6 +499,77 @@ recap.forEach((r,i)=>{
   recapWrap.appendChild(el);
 });
 
+/* ----- FLIGHT TRACKER ----- */
+// People anonymised to H & E. Each leg: who, airline, no, from, to, date, time label, codeshare flag.
+const flights = {
+  outbound: {
+    label: "Outbound", dir: "🛫", date: "Tue 24 Jun 2026", head: "→ Lisbon (LIS)",
+    legs: [
+      { who:"E", airline:"American", no:"AA6844", from:null,             to:"Lisbon", when:"lands", time:"17:55", codeshare:true },
+      { who:"H", airline:"El Al",    no:"LY375",  from:"Tel Aviv (TLV)", to:"Lisbon", when:"lands", time:"20:55" },
+    ],
+  },
+  return: {
+    label: "Return", dir: "🛬", date: "Tue 30 Jun 2026", head: "from Lisbon (LIS)",
+    legs: [
+      { who:"E", airline:"American", no:"AA7124", from:"Lisbon", to:null,             when:"departs", time:"07:10", codeshare:true },
+      { who:"H", airline:"El Al",    no:"LY376",  from:"Lisbon", to:"Tel Aviv (TLV)", when:"departs", time:"22:15" },
+    ],
+  },
+};
+
+const gStatus = no => "https://www.google.com/search?q=" + encodeURIComponent("flight status " + no);
+const faStatus = no => "https://flightaware.com/live/flight/" + no;
+
+const legRow = l => {
+  const route = (l.from ? l.from : "") + `<span class="arrow">→</span>` + (l.to ? l.to : "Lisbon");
+  return `<div class="leg">
+    <div class="who" aria-hidden="true">${l.who}</div>
+    <div class="leg-main">
+      <div class="leg-no">${l.no}<span class="air">${l.airline}${l.codeshare?" · codeshare":""}</span></div>
+      <div class="leg-route">${route}</div>
+      <div class="leg-meta"><b>${l.when} ${l.time}</b></div>
+    </div>
+    <div class="leg-actions">
+      <a class="track-btn" target="_blank" rel="noopener" href="${gStatus(l.no)}">Track live →</a>
+      <a class="fa-link" target="_blank" rel="noopener" href="${faStatus(l.no)}">FlightAware</a>
+    </div>
+  </div>`;
+};
+
+const flightsWrap = document.getElementById("flights");
+flightsWrap.innerHTML = ["outbound","return"].map(k=>{
+  const g = flights[k];
+  return `<div class="leg-group">
+    <div class="leg-group-h"><span class="dir" aria-hidden="true">${g.dir}</span>${g.label} · ${g.date} · ${g.head}</div>
+    ${g.legs.map(legRow).join("")}
+  </div>`;
+}).join("");
+
+/* ----- COUNTDOWN to first wheels-down in Lisbon (E, 2026-06-24 17:55) ----- */
+const CD_TARGET = new Date("2026-06-24T17:55:00");
+const cdUnits = document.getElementById("cd-units");
+const cdInner = document.getElementById("cd-inner");
+let cdTimer;
+
+function renderCountdown(){
+  const diff = CD_TARGET - new Date();
+  if(diff <= 0){
+    if(cdTimer) clearInterval(cdTimer);
+    cdInner.innerHTML = `<div class="cd-arrived">✈️ You're there — boa viagem!</div>`;
+    return;
+  }
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor(diff%86400000/3600000);
+  const m = Math.floor(diff%3600000/60000);
+  cdUnits.innerHTML =
+    `<div class="cd-unit"><div class="num">${d}</div><div class="u">Days</div></div>`+
+    `<div class="cd-unit"><div class="num">${h}</div><div class="u">Hours</div></div>`+
+    `<div class="cd-unit"><div class="num">${m}</div><div class="u">Minutes</div></div>`;
+}
+renderCountdown();
+cdTimer = setInterval(renderCountdown, 30000);
+
 /* ----- WEATHER (live, Open-Meteo) ----- */
 const WX_LOC = CONFIG.weather.locations;
 const WX_DAYS = CONFIG.weather.days;
@@ -444,6 +583,7 @@ async function loadWeather(){
       const {lat,lon}=WX_LOC[k];
       const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`
         +`&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max`
+        +`&hourly=temperature_2m,precipitation_probability,weather_code`
         +`&timezone=auto&start_date=${CONFIG.weather.start}&end_date=${CONFIG.weather.end}`;
       const r=await fetch(url); if(!r.ok) throw new Error("HTTP "+r.status);
       return [k, await r.json()];
@@ -461,7 +601,7 @@ async function loadWeather(){
 
 function renderWeather(data){
   wxBox.className="wx-strip";
-  wxBox.innerHTML = WX_DAYS.map(d=>{
+  wxBox.innerHTML = WX_DAYS.map((d,idx)=>{
     const src=data[d.loc];
     const i=(src&&src.daily&&src.daily.time)?src.daily.time.indexOf(d.iso):-1;
     const dm=+d.iso.slice(8,10);
@@ -486,7 +626,40 @@ function renderWeather(data){
   wxStatus.innerHTML=`<span style="color:var(--verde)">●</span> Live · Open-Meteo · checked ${t}. Long-range; firms up as the dates approach.`;
 }
 
+// "Today" strip — current conditions + next 12 hourly cells for today's base.
+async function loadToday(){
+  const box=document.getElementById("wx-today");
+  if(!box) return;
+  try{
+    const today=new Date().toISOString().slice(0,10);
+    const day=WX_DAYS.find(d=>d.iso===today) || WX_DAYS[0];
+    const {lat,lon,name}=WX_LOC[day.loc];
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`
+      +`&current=temperature_2m,weather_code`
+      +`&hourly=temperature_2m,weather_code,precipitation_probability`
+      +`&timezone=auto&forecast_days=2`;
+    const r=await fetch(url); if(!r.ok) throw new Error("HTTP "+r.status);
+    const d=await r.json();
+    if(!d.current || !d.hourly || !d.hourly.time) return;
+    const [ce,cl]=WMO[d.current.weather_code]||["❓","—"];
+    const ct=Math.round(d.current.temperature_2m);
+    const nowKey=(d.current.time||"").slice(0,13);
+    let start=d.hourly.time.findIndex(t=>t.slice(0,13) >= nowKey);
+    if(start<0) start=0;
+    const cells=d.hourly.time.slice(start, start+12).map((t,j)=>{
+      const idx=start+j;
+      const [e]=WMO[d.hourly.weather_code[idx]]||["❓"];
+      const tt=Math.round(d.hourly.temperature_2m[idx]);
+      const rr=d.hourly.precipitation_probability[idx] ?? 0;
+      return `<div class="wx-hr"><div class="h">${t.slice(11,16)}</div><div class="e">${e}</div><div class="t">${tt}°</div><div class="r">💧${rr}%</div></div>`;
+    }).join("");
+    box.innerHTML=`<div class="wx-today-h">Today in ${name} · next 12 hours <span class="wx-swipe">swipe →</span></div>`
+      +`<div class="wx-hours"><div class="wx-now"><div class="now-t">${ct}°</div><div class="now-l">${ce} ${cl} · now</div></div>${cells}</div>`;
+  }catch(e){ /* leave the today slot empty — the daily strip still shows */ }
+}
+
 loadWeather();
+loadToday();
 </script>
 </body>
 </html>
