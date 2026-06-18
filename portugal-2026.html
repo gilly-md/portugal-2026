@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portugal, for two · June 2026 · Choose your stays</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23fbfaf5'/><g fill='none' stroke='%231b4f8a' stroke-width='5'><path d='M50 12 L60 40 L88 50 L60 60 L50 88 L40 60 L12 50 L40 40 Z'/><circle cx='50' cy='50' r='10'/></g></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Hanken+Grotesk:wght@300..800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --azul:#1b4f8a;            /* azulejo blue */
+    --azul-deep:#16447a;
+    --azul-ink:#123a66;
+    --cream:#f3ecdd;          /* warm tile-white wall */
+    --paper:#ffffff;
+    --ink:#17293a;
+    --ink-soft:#4c5d6c;
+    --terra:#b14a32;          /* terracotta roof */
+    --terra-deep:#8f3a23;
+    --port:#7b2f3a;           /* port wine */
+    --verde:#5f7a48;          /* Douro green */
+    --gold:#b9842a;
+    --line:rgba(27,79,138,.16);
+    --shadow:0 18px 40px -24px rgba(18,58,102,.5);
+    /* faint azulejo wash — blue line motif on the cream wall */
+    --wash:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='60'%20height='60'%20viewBox='0%200%2060%2060'%3E%3Cg%20fill='none'%20stroke='%231b4f8a'%20stroke-width='1.4'%3E%3Ccircle%20cx='0'%20cy='0'%20r='17'/%3E%3Ccircle%20cx='60'%20cy='0'%20r='17'/%3E%3Ccircle%20cx='0'%20cy='60'%20r='17'/%3E%3Ccircle%20cx='60'%20cy='60'%20r='17'/%3E%3Cpath%20d='M30%2011%20L49%2030%20L30%2049%20L11%2030%20Z'/%3E%3Ccircle%20cx='30'%20cy='30'%20r='6'/%3E%3C/g%3E%3Cg%20fill='%231b4f8a'%3E%3Ccircle%20cx='30'%20cy='30'%20r='2.4'/%3E%3Ccircle%20cx='0'%20cy='30'%20r='2.4'/%3E%3Ccircle%20cx='60'%20cy='30'%20r='2.4'/%3E%3Ccircle%20cx='30'%20cy='0'%20r='2.4'/%3E%3Ccircle%20cx='30'%20cy='60'%20r='2.4'/%3E%3C/g%3E%3C/svg%3E");
+    /* azulejo tile band — white motif on blue */
+    --strip:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='60'%20height='60'%20viewBox='0%200%2060%2060'%3E%3Crect%20width='60'%20height='60'%20fill='%231b4f8a'/%3E%3Cg%20fill='none'%20stroke='%23fbfaf5'%20stroke-width='2'%3E%3Ccircle%20cx='0'%20cy='0'%20r='17'/%3E%3Ccircle%20cx='60'%20cy='0'%20r='17'/%3E%3Ccircle%20cx='0'%20cy='60'%20r='17'/%3E%3Ccircle%20cx='60'%20cy='60'%20r='17'/%3E%3Cpath%20d='M30%2011%20L49%2030%20L30%2049%20L11%2030%20Z'/%3E%3Ccircle%20cx='30'%20cy='30'%20r='6'/%3E%3C/g%3E%3Cg%20fill='%23fbfaf5'%3E%3Ccircle%20cx='30'%20cy='30'%20r='2.6'/%3E%3Ccircle%20cx='0'%20cy='30'%20r='2.6'/%3E%3Ccircle%20cx='60'%20cy='30'%20r='2.6'/%3E%3Ccircle%20cx='30'%20cy='0'%20r='2.6'/%3E%3Ccircle%20cx='30'%20cy='60'%20r='2.6'/%3E%3C/g%3E%3C/svg%3E");
+    /* calçada portuguesa wave */
+    --wave:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='110'%20height='34'%20viewBox='0%200%20110%2034'%3E%3Cg%20fill='none'%20stroke='%231b4f8a'%20stroke-width='3'%20stroke-linecap='round'%3E%3Cpath%20d='M0%2012%20Q13.75%202%2027.5%2012%20T55%2012%20T82.5%2012%20T110%2012'/%3E%3Cpath%20d='M0%2024%20Q13.75%2034%2027.5%2024%20T55%2024%20T82.5%2024%20T110%2024'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);
+    line-height:1.62;-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(1100px 560px at 82% -8%, rgba(27,79,138,.10), transparent 60%),
+      radial-gradient(820px 480px at -6% 22%, rgba(185,132,42,.10), transparent 55%),
+      var(--cream);
+    background-attachment:fixed;
+  }
+  /* faint azulejo tiled wall */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.06;background-image:var(--wash);background-size:54px 54px;}
+
+  /* top azulejo border strip */
+  .tilestrip{height:22px;background:var(--azul);background-image:var(--strip);background-size:30px 30px;box-shadow:0 2px 8px rgba(18,58,102,.25);position:relative;z-index:2;}
+
+  .wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 22px 90px;}
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:58px 0 8px;text-align:center;}
+  .panel{
+    display:inline-block;position:relative;max-width:780px;width:100%;
+    background:var(--paper);padding:44px 46px 40px;border-radius:7px;
+    box-shadow:0 0 0 4px var(--azul), 0 0 0 8px var(--paper), 0 0 0 12px var(--azul),
+               0 28px 54px -26px rgba(18,58,102,.55);
+    animation:rise .8s both;
+  }
+  .medallion{width:74px;height:74px;margin:0 auto 16px;display:block;filter:drop-shadow(0 10px 18px rgba(18,58,102,.22));}
+  .eyebrow{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:var(--terra-deep);font-weight:600;margin-bottom:14px;}
+  .hero h1{
+    font-family:"DM Serif Display",serif;font-weight:400;font-size:clamp(2.9rem,8vw,5rem);
+    line-height:.98;letter-spacing:-.01em;margin:0;color:var(--azul-deep);text-wrap:balance;
+  }
+  .hero h1 em{font-style:italic;color:var(--terra);}
+  .hero .sub{margin:22px auto 0;max-width:640px;font-size:1.05rem;color:var(--ink-soft);text-wrap:pretty;}
+  .hero .sub b{color:var(--ink);}
+  .facts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px;}
+  .fact{background:var(--cream);border:1px solid rgba(27,79,138,.22);border-radius:999px;padding:8px 16px;font-size:.9rem;display:flex;gap:8px;align-items:center;}
+  .fact b{font-weight:700;}
+  .wave{height:34px;max-width:560px;margin:32px auto 0;background-image:var(--wave);background-size:110px 34px;background-repeat:repeat-x;background-position:center;opacity:.85;}
+
+  /* ---------- SECTION HEADS ---------- */
+  .sec-head{display:flex;align-items:center;gap:14px;margin:54px 0 18px;}
+  .sec-head .gem{width:16px;height:16px;background:var(--azul);transform:rotate(45deg);border-radius:3px;flex:none;box-shadow:0 0 0 3px rgba(27,79,138,.16);}
+  .sec-head h2{font-family:"DM Serif Display",serif;font-weight:400;font-size:1.8rem;margin:0;color:var(--azul-deep);}
+  .sec-head .rule{flex:1;height:0;border-top:2px dotted rgba(27,79,138,.32);}
+  .sec-head .count{font-size:.85rem;color:var(--terra-deep);font-style:italic;}
+  .sec-intro{color:var(--ink-soft);font-size:.98rem;margin:-4px 0 4px;text-wrap:pretty;}
+  .sec-intro b{color:var(--ink);}
+  .disclaimer{background:rgba(185,132,42,.13);border:1px solid rgba(185,132,42,.34);border-radius:11px;padding:11px 15px;font-size:.86rem;color:var(--ink);margin:4px 0 2px;}
+  .disclaimer b{color:#7a5610;}
+
+  /* ---------- DECISIONS ---------- */
+  .urgent{background:linear-gradient(180deg,#fff7ec,#fdeede);border-radius:14px;padding:6px;box-shadow:0 0 0 2px rgba(176,74,50,.28),var(--shadow);overflow:hidden;}
+  .urgent-title{display:flex;align-items:center;gap:10px;padding:16px 18px 8px;font-weight:700;color:var(--terra-deep);letter-spacing:.02em;font-size:.95rem;}
+  .urgent-title .pulse{width:10px;height:10px;border-radius:50%;background:var(--terra);animation:pulse 2s infinite;}
+  details.todo{border-top:1px solid rgba(176,74,50,.16);}
+  details.todo:first-of-type{border-top:none;}
+  details.todo>summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;gap:12px;align-items:flex-start;transition:background .2s;}
+  details.todo>summary::-webkit-details-marker{display:none;}
+  details.todo>summary:hover{background:rgba(176,74,50,.06);}
+  .todo .chev{margin-left:auto;color:var(--terra);transition:transform .25s;flex:none;font-size:1.3rem;line-height:1;}
+  details.todo[open] .chev{transform:rotate(90deg);}
+  .todo .num{font-family:"DM Serif Display",serif;color:var(--terra);background:rgba(176,74,50,.12);border-radius:8px;width:28px;height:28px;display:grid;place-items:center;flex:none;font-size:1rem;}
+  .todo .head{font-weight:600;}
+  .todo .body{padding:0 18px 16px 58px;color:var(--ink-soft);font-size:.96rem;}
+  .todo .body b{color:var(--terra-deep);}
+
+  /* ---------- EXPANDABLE CARDS ---------- */
+  .card{background:var(--paper);border-radius:14px;margin-top:14px;box-shadow:0 0 0 2px var(--line),var(--shadow);overflow:hidden;transition:box-shadow .25s,transform .25s;animation:rise .6s both;}
+  .card:hover{box-shadow:0 0 0 2px rgba(27,79,138,.34),var(--shadow);}
+  .card.open{transform:translateY(-2px);}
+  .card-top{cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:18px 20px;}
+  .card-top:focus-visible{outline:2px solid var(--azul);outline-offset:-2px;}
+  .badge{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:1.5rem;background:rgba(27,79,138,.1);box-shadow:0 0 0 1px rgba(27,79,138,.22) inset;}
+  .card-main h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:1.36rem;margin:0 0 3px;color:var(--azul-deep);}
+  .card-sub{font-size:.8rem;color:var(--ink-soft);}
+  .card-toggle{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid rgba(27,79,138,.3);background:var(--cream);display:grid;place-items:center;color:var(--azul);font-size:1.5rem;line-height:1;transition:transform .3s,background .2s;}
+  .card.open .card-toggle{transform:rotate(135deg);background:var(--azul);color:#fff;}
+  .detail-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease;}
+  .card.open .detail-wrap{grid-template-rows:1fr;}
+  .detail{overflow:hidden;}
+  .detail-inner{padding:2px 20px 22px;border-top:1px dashed rgba(27,79,138,.18);}
+  .block{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid rgba(27,79,138,.08);}
+  .block:last-child{border-bottom:none;}
+  .block .ico{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:1.05rem;}
+  .ico.pick{background:rgba(185,132,42,.18);color:var(--gold);}
+  .ico.alt{background:rgba(27,79,138,.12);}
+  .ico.bnb{background:rgba(176,74,50,.14);}
+  .block .label{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:6px;}
+  .block p{margin:0;font-size:.97rem;}
+  .maplink{display:inline-flex;gap:5px;align-items:center;margin-left:4px;font-size:.8rem;font-weight:600;color:var(--azul-deep);text-decoration:none;border-bottom:1px solid rgba(22,68,99,.35);padding-bottom:1px;}
+  .maplink:hover{color:var(--terra-deep);border-color:var(--terra-deep);}
+  .pick-row{padding:9px 0;border-bottom:1px dotted rgba(27,79,138,.16);}
+  .pick-row:first-child{padding-top:2px;}
+  .pick-row:last-child{border-bottom:none;padding-bottom:0;}
+  .pick-h{display:flex;flex-wrap:wrap;align-items:center;gap:7px;}
+  .pick-tag{font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--azul-deep);background:rgba(27,79,138,.12);border-radius:999px;padding:2px 8px;}
+  .pick-tag.pin{color:#7a5610;background:rgba(185,132,42,.18);}
+  .price{display:inline-block;font-size:.7rem;font-weight:700;color:#7a5610;background:rgba(185,132,42,.16);border:1px solid rgba(185,132,42,.4);border-radius:999px;padding:1px 8px;white-space:nowrap;}
+  .pick-b{margin:4px 0 0;font-size:.94rem;}
+  .rate{font-size:.74rem;font-weight:700;color:var(--verde);white-space:nowrap;}
+  .rate .ct{color:var(--ink-soft);font-weight:500;}
+  .tier{font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;border-radius:999px;padding:2px 8px;}
+  .tier.value{color:#4d5733;background:rgba(95,122,72,.16);}
+  .tier.splurge{color:var(--port);background:rgba(123,47,58,.12);}
+  .tier.historic{color:var(--azul-deep);background:rgba(27,79,138,.12);}
+  .tradeoff{margin:5px 0 0;font-size:.86rem;color:var(--ink-soft);}
+  .tradeoff b{color:var(--terra-deep);font-weight:700;}
+  /* ♡ choice affordance */
+  .choose{margin-top:14px;background:linear-gradient(180deg,#fff7ec,#fdeede);border:1px solid rgba(176,74,50,.28);border-radius:12px;padding:12px 16px;font-size:.9rem;color:var(--ink);display:flex;gap:10px;align-items:flex-start;}
+  .choose .ht{font-size:1.15rem;line-height:1.2;color:var(--terra);flex:none;}
+  .choose b{color:var(--terra-deep);}
+  .istag{display:inline-flex;align-items:center;gap:5px;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-deep);background:rgba(176,74,50,.12);border:1px solid rgba(176,74,50,.3);border-radius:999px;padding:2px 9px;white-space:nowrap;}
+  /* top pick highlight in Douro */
+  .pick-tag.top{color:var(--port);background:rgba(123,47,58,.14);}
+
+  /* ---------- WEATHER ---------- */
+  .wx-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(84px,1fr));gap:8px;}
+  .wx-day{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 6px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;box-shadow:0 8px 22px -18px rgba(18,58,102,.5);transition:transform .2s;}
+  .wx-day:hover{transform:translateY(-2px);}
+  .wx-day.wet{border-color:rgba(27,79,138,.4);background:linear-gradient(180deg,var(--paper),rgba(27,79,138,.06));}
+  .wx-day .wd{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;}
+  .wx-day .emoji{font-size:1.55rem;line-height:1;margin:3px 0 1px;}
+  .wx-day .lbl{font-size:.68rem;color:var(--ink-soft);line-height:1.25;min-height:2.4em;display:flex;align-items:center;}
+  .wx-day .temp{font-family:"DM Serif Display",serif;font-size:1.05rem;color:var(--ink);}
+  .wx-day .temp .lo{color:var(--ink-soft);font-weight:400;font-size:.8rem;}
+  .wx-day .rain{font-size:.66rem;font-weight:700;border-radius:999px;padding:1px 8px;margin-top:2px;}
+  .wx-day .rain.dry{color:#4d5733;background:rgba(95,122,72,.16);}
+  .wx-day .rain.wet{color:var(--azul-deep);background:rgba(27,79,138,.16);}
+  .wx-day .base{font-size:.58rem;color:var(--ink-soft);opacity:.85;margin-top:1px;}
+  .wx-loading{background:var(--paper);border:1px dashed rgba(27,79,138,.3);border-radius:12px;padding:26px;text-align:center;color:var(--ink-soft);font-size:.92rem;}
+  .wx-status{margin-top:10px;font-size:.76rem;color:var(--ink-soft);}
+
+  /* ---------- WEEK TABLE ---------- */
+  .skeleton{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin-top:14px;}
+  table{width:100%;border-collapse:collapse;font-size:.94rem;}
+  thead th{background:var(--azul);color:#fdf6e9;text-align:left;padding:13px 18px;font-weight:600;font-size:.82rem;letter-spacing:.04em;}
+  tbody td{padding:13px 18px;border-top:1px solid rgba(27,79,138,.14);vertical-align:top;}
+  tbody tr:nth-child(even){background:rgba(95,122,72,.05);}
+  td .base{font-weight:600;color:var(--azul-deep);}
+  td .nts{white-space:nowrap;font-weight:700;color:var(--port);}
+
+  /* ---------- RECAP CARDS (your brief) ---------- */
+  .qs{display:grid;gap:12px;}
+  .q{display:flex;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:15px 18px;box-shadow:0 8px 22px -18px rgba(18,58,102,.5);}
+  .q .n{flex:none;align-self:flex-start;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:"DM Serif Display",serif;font-size:1rem;color:#fff;background:linear-gradient(135deg,var(--azul),var(--azul-deep));}
+  .q b{font-weight:700;}
+  .q p{margin:3px 0 0;font-size:.92rem;color:var(--ink-soft);}
+
+  .nextnote{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow);margin-top:14px;}
+  .nextnote-h{font-family:"DM Serif Display",serif;font-size:1.25rem;color:var(--azul-deep);margin-bottom:6px;}
+  .nextnote p{margin:8px 0 0;color:var(--ink-soft);font-size:.97rem;}
+  .nextnote p b{color:var(--ink);}
+  .nextnote-step{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px!important;color:var(--ink)!important;font-size:.9rem!important;font-weight:600;}
+  .step-pill{font-family:"DM Serif Display",serif;width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--azul),var(--azul-deep));font-size:.85rem;flex:none;}
+  .step-arrow{color:var(--terra);font-weight:700;}
+
+  footer{text-align:center;margin-top:60px;color:var(--ink-soft);font-size:.85rem;}
+  footer .fwave{height:24px;max-width:340px;margin:0 auto 22px;background-image:var(--wave);background-size:110px 24px;background-repeat:repeat-x;background-position:center;opacity:.55;}
+
+  @keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(176,74,50,.55);}70%{box-shadow:0 0 0 12px rgba(176,74,50,0);}100%{box-shadow:0 0 0 0 rgba(176,74,50,0);}}
+  @media (max-width:560px){
+    .panel{padding:34px 24px 30px;}
+    .card-top{grid-template-columns:auto 1fr;}
+    .card-toggle{grid-column:1 / -1;justify-self:end;margin-top:-8px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;}}
+</style>
+</head>
+<body>
+<div class="tilestrip" aria-hidden="true"></div>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="panel">
+      <svg class="medallion" viewBox="0 0 100 100" role="img" aria-label="Azulejo tile">
+        <rect x="3" y="3" width="94" height="94" rx="16" fill="#fbfaf5" stroke="#1b4f8a" stroke-width="2.5"/>
+        <g fill="none" stroke="#1b4f8a" stroke-width="3.4" stroke-linejoin="round">
+          <path d="M50 14 L60 40 L86 50 L60 60 L50 86 L40 60 L14 50 L40 40 Z"/>
+          <circle cx="50" cy="50" r="9"/>
+        </g>
+        <circle cx="50" cy="50" r="3.4" fill="#b9842a"/>
+        <g fill="none" stroke="#b14a32" stroke-width="2.2">
+          <circle cx="14" cy="14" r="5"/><circle cx="86" cy="14" r="5"/>
+          <circle cx="14" cy="86" r="5"/><circle cx="86" cy="86" r="5"/>
+        </g>
+      </svg>
+      <div class="eyebrow">A Romantic Escape · Porto · Douro · Lisboa</div>
+      <h1>Portugal,<br><em>for two</em></h1>
+      <p class="sub">Six nights along the north — Porto's riverside, the vineyards of the Douro, and a little Lisbon light. Late June, unhurried, and built around the two of you. <b>This page is for choosing your stays</b> — pick one per base, and we'll build the day-by-day around what you choose.</p>
+      <div class="facts">
+        <span class="fact"><span>🗓️</span><b>24 – 30 June 2026</b></span>
+        <span class="fact"><span>💙</span>For H &amp; E</span>
+        <span class="fact"><span>🍷</span>Porto · Douro · Lisboa</span>
+      </div>
+    </div>
+    <div class="wave" aria-hidden="true"></div>
+  </header>
+
+  <!-- WHAT YOU TOLD US -->
+  <section class="sec-head"><span class="gem"></span><h2>What you told us</h2><span class="rule"></span><span class="count">your brief, in a line each</span></section>
+  <p class="sec-intro">This is the shape we're planning to. The stays below are picked to fit it — <b>romantic views were a must</b>, so that's the thread running through them.</p>
+  <div class="qs" id="recap"></div>
+
+  <!-- WEATHER -->
+  <section class="sec-head"><span class="gem"></span><h2>Weather watch</h2><span class="rule"></span><span class="count">live · your dates</span></section>
+  <div id="wx" class="wx-loading">Loading live forecast…</div>
+  <div class="wx-status" id="wx-status" hidden></div>
+
+  <!-- CHOOSE YOUR STAYS -->
+  <section class="sec-head"><span class="gem"></span><h2>Choose your stays</h2><span class="rule"></span><span class="count">tap a base · pick one each</span></section>
+  <p class="sec-intro">Two to three options per base, tiered <b>value</b> vs <b>splurge</b> — each with its real Google rating, an indicative price, the vibe, and the honest tradeoff. Pick the one that feels like you for each base and tell Wilma; that locks the day-by-day.</p>
+  <p class="disclaimer">⚑ <b>Prices are indicative for late-June peak</b> — a snapshot to compare on, not a quote. We confirm the live price for your exact dates before you book.</p>
+  <div id="stays"></div>
+
+  <!-- WEEK -->
+  <section class="sec-head"><span class="gem"></span><h2>The shape of the week</h2><span class="rule"></span><span class="count">flights fixed · nights flexible</span></section>
+  <p class="sec-intro">Flights and car are <b>booked</b>; Lisbon is the airport bookend in and out, so the heart of the trip sits in <b>Porto + the Douro</b>. One note: a true even Porto/Douro split isn't possible — <b>E's 07:10 flight on the 30th forces an airport-side Lisbon night on the 29th</b>.</p>
+  <div class="skeleton">
+    <table>
+      <thead><tr><th>Dates</th><th>Base</th><th>Nights</th><th>The move</th></tr></thead>
+      <tbody>
+        <tr><td>24–27 Jun</td><td><span class="base">Porto</span></td><td class="nts">3</td><td>Land Lisbon (E 17:55 · H 20:55) → push on to Porto that night</td></tr>
+        <tr><td>27–29 Jun</td><td><span class="base">Douro Valley</span></td><td class="nts">2</td><td>Drive Porto → Douro</td></tr>
+        <tr><td>29–30 Jun</td><td><span class="base">Lisbon</span></td><td class="nts">1</td><td>Drive Douro → Lisbon (airport-side) · depart 30th (E 07:10 · H bonus full day, flies 22:15)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- NEXT -->
+  <section class="sec-head"><span class="gem"></span><h2>Next: pick your stays</h2><span class="rule"></span><span class="count">then we build your day-by-day</span></section>
+  <div class="nextnote">
+    <div class="nextnote-h">🗺️ The day-by-day comes after you choose</div>
+    <p>This draft is deliberately just the <b>stays decision</b> — there's no hour-by-hour plan yet, on purpose. Once you've picked one stay per base (Porto · Douro · Lisbon) and told Wilma, we'll build the day-by-day around your choices: the winery day, a beach day, walks and tascas, sunsets, and the drive times worked out around your rooms.</p>
+    <p class="nextnote-step"><span class="step-pill">1</span> Pick a stay per base above <span class="step-arrow">→</span> <span class="step-pill">2</span> Tell Wilma your three <span class="step-arrow">→</span> <span class="step-pill">3</span> We confirm live prices &amp; book <span class="step-arrow">→</span> <span class="step-pill">4</span> Your day-by-day is built</p>
+  </div>
+
+  <footer>
+    <div class="fwave" aria-hidden="true"></div>
+    <span>Lisboa → Porto → Douro Valley → Lisboa</span>
+    <div style="font-size:.74rem;opacity:.85;margin-top:10px">Stay names, prices &amp; notes are snapshots (~June 2026), indicative not live — confirm availability for your exact dates. Weather is live.</div>
+  </footer>
+
+</div>
+
+<script>
+const CONFIG = {
+  weather: {
+    start: "2026-06-24", end: "2026-06-30",
+    locations: {
+      porto:  { lat:41.1496, lon:-8.6109, name:"Porto" },
+      douro:  { lat:41.2700, lon:-8.0800, name:"Douro" },
+      lisbon: { lat:38.7223, lon:-9.1393, name:"Lisbon" },
+    },
+    days: [
+      { n:1, dow:"Wed", iso:"2026-06-24", loc:"porto" },
+      { n:2, dow:"Thu", iso:"2026-06-25", loc:"porto" },
+      { n:3, dow:"Fri", iso:"2026-06-26", loc:"porto" },
+      { n:4, dow:"Sat", iso:"2026-06-27", loc:"douro" },
+      { n:5, dow:"Sun", iso:"2026-06-28", loc:"douro" },
+      { n:6, dow:"Mon", iso:"2026-06-29", loc:"lisbon" },
+      { n:7, dow:"Tue", iso:"2026-06-30", loc:"lisbon" },
+    ],
+  },
+};
+
+const M = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+const plus = "+";
+const pin = "📍";
+
+// Each option: name, rate (Google ★ + count), price (indicative), tier, vibe, tradeoff, q (Maps).
+// top:true marks our recommended pick for that base.
+const stays = [
+  { city:"Porto", emoji:"🏰", sub:"24–27 June · 3 nights · riverside · the heart of the trip",
+    options:[
+      { name:"Gran Cruz House", rate:"4.7", ct:"147", price:"~€250–400/nt", tier:"value", top:true,
+        vibe:`Value &amp; intimate — and the closest fit to your €250 + seclusion brief.`,
+        blurb:`Ribeira riverfront with just <b>7 rooms</b>, owned by a Port-wine house; some rooms have river views. Small, personal, and right in the old town.`,
+        tradeoff:`Tiny boutique — books out fast, so we'd confirm early.`, q:"Gran Cruz House Porto" },
+      { name:"Pestana Vintage Porto", rate:"4.7", ct:"2801", price:"~€300–450/nt", tier:"historic",
+        vibe:`Historic heart, on the most famous square in Porto.`,
+        blurb:`Right on <b>Ribeira Square</b>, with Douro-view rooms (some with bathtubs over the river). The postcard-Porto location.`,
+        tradeoff:`Busy tourist hub; a big hotel, so less intimate than the boutiques.`, q:"Pestana Vintage Porto Ribeira" },
+      { name:"The Rebello, Hotel &amp; Spa", rate:"4.7", ct:"655", price:"~€350–550/nt", tier:"splurge",
+        vibe:`Splurge &amp; wow — the design-hotel showstopper.`,
+        blurb:`Gaia's waterfront, a Small Luxury Hotel: rooftop bar &amp; spa, <b>panoramic Douro &amp; Dom Luís bridge views</b>, big design suites in restored riverside buildings.`,
+        tradeoff:`Over the €250 budget; across the river in Gaia — a bridge walk from the old town.`, q:"The Rebello Hotel Spa Vila Nova de Gaia" },
+    ],
+    bnb:`Apartment route — a river-facing <b>Ribeira / Cais de Gaia penthouse with a terrace</b> runs around €250 and gives you space + privacy with the bridge view.` },
+
+  { city:"Douro Valley", emoji:"🍇", sub:"27–29 June · 2 nights · vineyards · river-gorge country",
+    options:[
+      { name:"Quinta de Santa Marinha", rate:"4.9", ct:"94", price:"~€200–280/nt (by enquiry)", tier:"value", top:true,
+        vibe:`Our top pick — best fit for your whole brief (seclusion + river views + rustic + winery).`,
+        blurb:`Castedo do Douro / Alijó, <b>on the terraced river gorge near Pinhão</b>. A secluded 5-room family quinta with a suspended valley pool, on-site wine tourism (vineyard walks, even make-your-own-wine), and home-cooked terrace dinners. The <b>Suite</b> = King + valley view.`,
+        tradeoff:`A homestay feel — no spa, remote winding access, home-cooking not fine-dining. Price by enquiry; we confirm direct.`, q:"Quinta de Santa Marinha Alijo Douro" },
+      { name:"Quinta da Côrte", rate:"4.8", ct:"158", price:"~€280–420/nt", tier:"splurge",
+        vibe:`Polished &amp; intimate — a design-hotel take on the quinta.`,
+        blurb:`Tabuaço, intimate, with a <b>valley-view pool</b> and a more designed, hotel-like finish.`,
+        tradeoff:`Pricier, and more design-hotel than family-quinta if it's warmth you're after.`, q:"Quinta da Corte Tabuaco Douro" },
+      { name:"Casa do Rio — Quinta do Vallado", rate:"4.9", ct:"238", price:"~€250–400/nt", tier:"splurge",
+        vibe:`Architectural escape with an infinity pool over the river.`,
+        blurb:`8 suites and an <b>infinity pool over the river</b>, from a respected wine estate.`,
+        tradeoff:`Further east (Foz Côa) — more driving to and from your other days.`, q:"Casa do Rio Quinta do Vallado Douro" },
+      { name:"Monverde — Wine Experience Hotel", rate:"4.7", ct:"1572", price:"~€300+/nt", tier:"historic",
+        vibe:`Full wine-hotel with spa &amp; two pools — service over scenery.`,
+        blurb:`A vineyard wine-hotel with spa and two pools. <b>⚑ Flag:</b> it's in <b>Vinho Verde country (Telões), ~45 min from the iconic terraced river gorge</b> — there's no postcard river view from the room. Keep only if you'd trade the river view for spa + full hotel service.`,
+        tradeoff:`The river-gorge view — the thing you said is a must — isn't here.`, q:"Monverde Wine Experience Hotel" },
+    ],
+    splurge:`Big-celebration option: <b>Six Senses Douro Valley</b> ★4.9 (1818), ~€700+/nt — a restored manor with an award-winning spa and fine dining near Régua.`,
+    bnb:`Prefer a private cottage? Look near <b>Pinhão or Peso da Régua</b> for a working wine estate renting a suite with a valley view and pool.` },
+
+  { city:"Lisbon", emoji:"🌉", sub:"29–30 June · 1 functional night · airport-side bookend",
+    note:`Just one airport-side night before E's 07:10 flight (both options ~15 min from the airport). H has a full last day on the 30th — so we'll ask the stay for <b>late checkout / luggage storage</b>.`,
+    options:[
+      { name:"Memmo Alfama", rate:"4.6", ct:"991", price:"~€300–450/nt", tier:"value", top:true,
+        vibe:`Alfama soul and one of the best sunset spots in the city.`,
+        blurb:`Intimate boutique in the heart of <b>Alfama</b>, with a rooftop pool/bar over the river.`,
+        tradeoff:`Alfama's lanes are steep and stepped — charming, but not the easiest with luggage.`, q:"Memmo Alfama Lisbon" },
+      { name:"Verride Palácio Santa Catarina", rate:"4.6", ct:"379", price:"~€450–700/nt", tier:"splurge",
+        vibe:`Genuine wow — a palace finish to the trip.`,
+        blurb:`An 18th-c palace with a <b>rooftop pool and sweeping Tagus views</b> — ornate and sophisticated.`,
+        tradeoff:`A big splurge for a single functional night before an early flight.`, q:"Verride Palacio Santa Catarina Lisbon" },
+    ],
+    bnb:`Apartment route: <b>Príncipe Real</b> for rooftop-terrace flats over the river; <b>Alfama</b> for 18th-c character.` },
+];
+
+const recap = [
+  { q:`Romantic means…`, hint:`Seclusion &amp; privacy · adventure together · sunsets &amp; views · great wine &amp; food. <b>Romantic views a must.</b>` },
+  { q:`Pace`, hint:`Slow &amp; unhurried.` },
+  { q:`Stays`, hint:`A mix of hotels &amp; apartments, per place. Comfortable around <b>€250/night</b>.` },
+  { q:`Wine &amp; food`, hint:`A proper winery day, and rustic local tascas.` },
+  { q:`Days look like`, hint:`Walking tours · hiking &amp; nature · café-wandering · a beach day.` },
+  { q:`Getting around`, hint:`Happy to drive — and to push on to Porto the arrival night.` },
+  { q:`Focus`, hint:`Porto + Douro. Lisbon is just the airport bookend.` },
+];
+
+function wireToggle(el){
+  const top = el.querySelector(".card-top");
+  const set = ()=> top.setAttribute("aria-expanded", el.classList.toggle("open"));
+  top.addEventListener("click", set);
+  top.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); set(); } });
+}
+
+const TIER = { value:"Value", splurge:"Splurge", historic:"Historic" };
+const optRow = o=>`
+  <div class="pick-row">
+    <div class="pick-h">
+      ${o.top?`<span class="pick-tag top">★ Our pick</span>`:``}
+      <b>${o.name}</b>
+      <span class="tier ${o.tier}">${TIER[o.tier]||""}</span>
+      <span class="rate">★ ${o.rate} <span class="ct">(${o.ct})</span></span>
+      <span class="price">${o.price}</span>
+    </div>
+    <p class="pick-b"><b>${o.vibe}</b> ${o.blurb}</p>
+    <p class="tradeoff"><b>Tradeoff:</b> ${o.tradeoff} <a class="maplink" target="_blank" rel="noopener" href="${M(o.q)}">${pin} Maps</a></p>
+  </div>`;
+
+const staysWrap = document.getElementById("stays");
+stays.forEach((s,i)=>{
+  const el=document.createElement("article");
+  el.className="card"; el.style.animationDelay=(0.05+i*0.05)+"s";
+  const rows = s.options.map(optRow).join("");
+  const noteBlock = s.note ? `<div class="block"><div class="ico alt">✈️</div><div><div class="label">Good to know</div><p>${s.note}</p></div></div>` : "";
+  const splurgeBlock = s.splurge ? `<div class="block"><div class="ico pick">✦</div><div><div class="label">If it's a big celebration</div><p>${s.splurge}</p></div></div>` : "";
+  el.innerHTML=`
+    <div class="card-top" role="button" tabindex="0" aria-expanded="false" aria-controls="s${i}" aria-label="${s.city} — see stay options">
+      <div class="badge" aria-hidden="true">${s.emoji}</div>
+      <div class="card-main"><h3>${s.city}</h3><div class="card-sub">${s.sub}</div></div>
+      <div class="card-toggle" aria-hidden="true">${plus}</div>
+    </div>
+    <div class="detail-wrap" id="s${i}"><div class="detail"><div class="detail-inner">
+      ${noteBlock}
+      <div class="block"><div class="ico pick">★</div><div>
+        <div class="label">The options</div>${rows}
+      </div></div>
+      ${splurgeBlock}
+      <div class="block"><div class="ico bnb">🏠</div><div>
+        <div class="label">Prefer an apartment?</div><p>${s.bnb}</p>
+      </div></div>
+      <div class="choose">
+        <span class="ht" aria-hidden="true">♡</span>
+        <div>Found the one for <b>${s.city}</b>? Mark it <span class="istag">♡ This is us</span> and <b>tell Wilma your pick</b> — reply with your choice for each base and we'll lock it in.</div>
+      </div>
+    </div></div></div>`;
+  wireToggle(el);
+  staysWrap.appendChild(el);
+});
+
+const recapWrap = document.getElementById("recap");
+recap.forEach((r,i)=>{
+  const el=document.createElement("div");
+  el.className="q";
+  el.innerHTML=`<div class="n" aria-hidden="true">✓</div><div><b>${r.q}</b><p>${r.hint}</p></div>`;
+  recapWrap.appendChild(el);
+});
+
+/* ----- WEATHER (live, Open-Meteo) ----- */
+const WX_LOC = CONFIG.weather.locations;
+const WX_DAYS = CONFIG.weather.days;
+const WMO = {0:["☀️","Clear"],1:["🌤️","Mainly clear"],2:["⛅","Partly cloudy"],3:["☁️","Overcast"],45:["🌫️","Fog"],48:["🌫️","Fog"],51:["🌦️","Drizzle"],53:["🌦️","Drizzle"],55:["🌦️","Drizzle"],61:["🌧️","Light rain"],63:["🌧️","Rain"],65:["🌧️","Heavy rain"],80:["🌦️","Showers"],81:["🌦️","Showers"],82:["⛈️","Heavy showers"],95:["⛈️","Thunderstorm"],96:["⛈️","Thunderstorm"],99:["⛈️","Thunderstorm"]};
+const wxBox = document.getElementById("wx");
+const wxStatus = document.getElementById("wx-status");
+
+async function loadWeather(){
+  try{
+    const entries = await Promise.all(Object.keys(WX_LOC).map(async k=>{
+      const {lat,lon}=WX_LOC[k];
+      const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`
+        +`&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max`
+        +`&timezone=auto&start_date=${CONFIG.weather.start}&end_date=${CONFIG.weather.end}`;
+      const r=await fetch(url); if(!r.ok) throw new Error("HTTP "+r.status);
+      return [k, await r.json()];
+    }));
+    renderWeather(Object.fromEntries(entries));
+  }catch(err){
+    wxBox.className="wx-loading";
+    wxBox.textContent="Couldn't load the live forecast (it appears closer to the dates). ";
+    const rt=document.createElement("a");
+    rt.href="#"; rt.textContent="try again"; rt.style.color="var(--terra-deep)"; rt.style.fontWeight="600";
+    rt.addEventListener("click",e=>{e.preventDefault();wxBox.className="wx-loading";wxBox.textContent="Loading live forecast…";loadWeather();});
+    wxBox.appendChild(rt);
+  }
+}
+
+function renderWeather(data){
+  wxBox.className="wx-strip";
+  wxBox.innerHTML = WX_DAYS.map(d=>{
+    const src=data[d.loc];
+    const i=(src&&src.daily&&src.daily.time)?src.daily.time.indexOf(d.iso):-1;
+    const dm=+d.iso.slice(8,10);
+    if(i<0) return `<div class="wx-day"><div class="wd">${d.dow} ${dm}</div><div class="emoji">…</div><div class="lbl">forecast nearer the date</div><div class="base">${WX_LOC[d.loc].name}</div></div>`;
+    const code=src.daily.weather_code[i];
+    const hi=Math.round(src.daily.temperature_2m_max[i]);
+    const lo=Math.round(src.daily.temperature_2m_min[i]);
+    const rain=src.daily.precipitation_probability_max[i] ?? 0;
+    const [emoji,label]=WMO[code]||["❓","—"];
+    const wet=rain>=40;
+    return `<div class="wx-day${wet?' wet':''}">
+      <div class="wd">${d.dow} ${dm}</div>
+      <div class="emoji" role="img" aria-label="${label}">${emoji}</div>
+      <div class="lbl">${label}</div>
+      <div class="temp">${hi}°<span class="lo"> / ${lo}°</span></div>
+      <div class="rain ${wet?'wet':'dry'}">💧 ${rain}%</div>
+      <div class="base">${WX_LOC[d.loc].name}</div>
+    </div>`;
+  }).join("");
+  const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  wxStatus.hidden=false;
+  wxStatus.innerHTML=`<span style="color:var(--verde)">●</span> Live · Open-Meteo · checked ${t}. Long-range; firms up as the dates approach.`;
+}
+
+loadWeather();
+</script>
+</body>
+</html>
