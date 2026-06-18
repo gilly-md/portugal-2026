@@ -79,6 +79,20 @@
   .sec-head h2{font-family:"DM Serif Display",serif;font-weight:400;font-size:1.8rem;margin:0;color:var(--azul-deep);}
   .sec-head .rule{flex:1;height:0;border-top:2px dotted rgba(27,79,138,.32);}
   .sec-head .count{font-size:.85rem;color:var(--terra-deep);font-style:italic;}
+  details.recap{margin:54px 0 0;}
+  details.recap>summary{list-style:none;cursor:pointer;}
+  details.recap>summary::-webkit-details-marker{display:none;}
+  details.recap>summary.sec-head{margin:54px 0 18px;}
+  details.recap>summary .count::after{content:" ▸";font-style:normal;}
+  details.recap[open]>summary .count::after{content:" ▾";}
+  details.recap>summary:hover h2{color:var(--azul);}
+  .routemap{background:var(--paper);border-radius:7px;padding:22px 20px 16px;border:1px solid rgba(27,79,138,.14);box-shadow:0 10px 30px -18px rgba(18,58,102,.45);}
+  .routemap svg{width:100%;height:auto;display:block;}
+  .routemap .legs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px;}
+  .routemap .leg{background:var(--cream);border:1px solid rgba(27,79,138,.22);border-radius:999px;padding:8px 16px;font-size:.86rem;display:flex;gap:8px;align-items:center;color:var(--ink);}
+  .routemap .leg b{color:var(--azul-deep);}
+  .routemap .leg .km{color:var(--ink-soft);font-size:.8rem;}
+  .routemap .total{text-align:center;margin:14px 0 2px;font-size:.82rem;color:var(--ink-soft);font-style:italic;}
   .sec-intro{color:var(--ink-soft);font-size:.98rem;margin:-4px 0 4px;text-wrap:pretty;}
   .sec-intro b{color:var(--ink);}
   .disclaimer{background:rgba(185,132,42,.13);border:1px solid rgba(185,132,42,.34);border-radius:11px;padding:11px 15px;font-size:.86rem;color:var(--ink);margin:4px 0 2px;}
@@ -285,11 +299,6 @@
     <div class="wave" aria-hidden="true"></div>
   </header>
 
-  <!-- WHAT YOU TOLD US -->
-  <section class="sec-head"><span class="gem"></span><h2>What you told us</h2><span class="rule"></span><span class="count">your brief, in a line each</span></section>
-  <p class="sec-intro">This is the shape we're planning to. The stays below are picked to fit it — <b>romantic views were a must</b>, so that's the thread running through them.</p>
-  <div class="qs" id="recap"></div>
-
   <!-- WEATHER -->
   <section class="sec-head"><span class="gem"></span><h2>Weather watch</h2><span class="rule"></span><span class="count">live · your dates</span></section>
   <div class="wx-today" id="wx-today"></div>
@@ -322,7 +331,7 @@
     <table>
       <thead><tr><th>Dates</th><th>Base</th><th>Nights</th><th>The move</th></tr></thead>
       <tbody>
-        <tr><td>24–27 Jun</td><td><span class="base">Porto</span></td><td class="nts">3</td><td>Land Lisbon (E 17:55 · H 20:55) → push on to Porto that night</td></tr>
+        <tr><td>24–27 Jun</td><td><span class="base">Porto</span></td><td class="nts">3</td><td>Land Lisbon (E ~17:55 (to confirm) · H 20:55) → push on to Porto that night</td></tr>
         <tr><td>27–29 Jun</td><td><span class="base">Douro Valley</span></td><td class="nts">2</td><td>Drive Porto → Douro</td></tr>
         <tr><td>29–30 Jun</td><td><span class="base">Lisbon</span></td><td class="nts">1</td><td>Drive Douro → Lisbon (airport-side) · depart 30th (E 07:10 · H bonus full day, flies 22:15)</td></tr>
       </tbody>
@@ -336,6 +345,66 @@
     <p>This draft is deliberately just the <b>stays decision</b> — there's no hour-by-hour plan yet, on purpose. Once you've picked one stay per base (Porto · Douro · Lisbon) and told Wilma, we'll build the day-by-day around your choices: the winery day, a beach day, walks and tascas, sunsets, and the drive times worked out around your rooms.</p>
     <p class="nextnote-step"><span class="step-pill">1</span> Pick a stay per base above <span class="step-arrow">→</span> <span class="step-pill">2</span> Tell Wilma your three <span class="step-arrow">→</span> <span class="step-pill">3</span> We confirm live prices &amp; book <span class="step-arrow">→</span> <span class="step-pill">4</span> Your day-by-day is built</p>
   </div>
+
+  <!-- ROUTE MAP (collapsible) -->
+  <details class="recap">
+    <summary class="sec-head"><span class="gem"></span><h2>The route</h2><span class="rule"></span><span class="count">tap to open · drive times</span></summary>
+  <p class="sec-intro">A simple loop out of Lisbon: <b>up the coast to Porto</b>, <b>east into the Douro</b>, then <b>back down to Lisbon</b> for the flights home. Drive times are typical, no traffic.</p>
+  <div class="routemap">
+    <svg viewBox="0 0 820 460" role="img" aria-label="Route map: Lisbon to Porto to Douro Valley and back to Lisbon, with driving times">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#1b4f8a"/>
+        </marker>
+      </defs>
+      <!-- Atlantic coast hint (left) -->
+      <path d="M0,0 L92,0 C66,118 116,236 78,352 C58,414 90,440 68,460 L0,460 Z" fill="#1b4f8a" opacity="0.06"/>
+      <path d="M92,0 C66,118 116,236 78,352 C58,414 90,440 68,460" fill="none" stroke="#1b4f8a" stroke-opacity="0.22" stroke-width="2" stroke-dasharray="2 7"/>
+      <text x="40" y="230" fill="#16447a" opacity="0.4" font-family="Hanken Grotesk,sans-serif" font-size="13" letter-spacing="3" transform="rotate(-90 40 230)" text-anchor="middle">ATLANTIC</text>
+
+      <!-- Route edges (the loop) -->
+      <path d="M330,360 C238,300 232,222 250,158" fill="none" stroke="#1b4f8a" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+      <path d="M250,150 C400,104 528,104 642,128" fill="none" stroke="#1b4f8a" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+      <path d="M648,138 C566,256 472,318 342,362" fill="none" stroke="#1b4f8a" stroke-width="4" stroke-linecap="round" stroke-dasharray="9 7" marker-end="url(#arrow)"/>
+
+      <!-- Time tags -->
+      <g font-family="Hanken Grotesk,sans-serif">
+        <g transform="translate(196,250)"><rect x="-34" y="-16" width="68" height="32" rx="16" fill="#fff" stroke="#b14a32" stroke-width="1.5"/><text x="0" y="5" text-anchor="middle" font-size="16" font-weight="700" fill="#16447a">3h00</text></g>
+        <g transform="translate(446,88)"><rect x="-34" y="-16" width="68" height="32" rx="16" fill="#fff" stroke="#b14a32" stroke-width="1.5"/><text x="0" y="5" text-anchor="middle" font-size="16" font-weight="700" fill="#16447a">1h45</text></g>
+        <g transform="translate(536,262)"><rect x="-34" y="-16" width="68" height="32" rx="16" fill="#fff" stroke="#b14a32" stroke-width="1.5"/><text x="0" y="5" text-anchor="middle" font-size="16" font-weight="700" fill="#16447a">3h50</text></g>
+      </g>
+
+      <!-- Nodes -->
+      <g font-family="DM Serif Display,serif">
+        <!-- Porto -->
+        <rect x="241" y="145" width="18" height="18" rx="3" transform="rotate(45 250 154)" fill="#1b4f8a" stroke="#fff" stroke-width="2.5"/>
+        <text x="250" y="128" text-anchor="middle" font-size="21" fill="#16447a">Porto</text>
+        <text x="250" y="192" text-anchor="middle" font-family="Hanken Grotesk,sans-serif" font-size="12.5" fill="#4c5d6c">24–27 Jun · 3 nts</text>
+        <!-- Douro -->
+        <rect x="641" y="125" width="18" height="18" rx="3" transform="rotate(45 650 134)" fill="#1b4f8a" stroke="#fff" stroke-width="2.5"/>
+        <text x="650" y="108" text-anchor="middle" font-size="21" fill="#16447a">Douro Valley</text>
+        <text x="650" y="172" text-anchor="middle" font-family="Hanken Grotesk,sans-serif" font-size="12.5" fill="#4c5d6c">27–29 Jun · 2 nts</text>
+        <!-- Lisbon -->
+        <rect x="321" y="351" width="18" height="18" rx="3" transform="rotate(45 330 360)" fill="#b14a32" stroke="#fff" stroke-width="2.5"/>
+        <text x="330" y="398" text-anchor="middle" font-size="21" fill="#8f3a23">Lisbon</text>
+        <text x="330" y="418" text-anchor="middle" font-family="Hanken Grotesk,sans-serif" font-size="12.5" fill="#4c5d6c">start &amp; finish · airport bookend</text>
+      </g>
+    </svg>
+    <div class="legs">
+      <span class="leg">🚗 <b>Lisbon → Porto</b> · 3h00 <span class="km">· 314 km · A1 · arrival-night push</span></span>
+      <span class="leg">🚗 <b>Porto → Douro</b> · 1h45 <span class="km">· 130 km · A4</span></span>
+      <span class="leg">🚗 <b>Douro → Lisbon</b> · 3h50 <span class="km">· 407 km · A24/A1 · the return</span></span>
+    </div>
+    <p class="total">Loop ≈ 8h total on the road across the week · typical times, no traffic · the Douro legs vary by your exact quinta</p>
+  </div>
+  </details>
+
+  <!-- WHAT YOU TOLD US (collapsible · at bottom) -->
+  <details class="recap">
+    <summary class="sec-head"><span class="gem"></span><h2>What you told us</h2><span class="rule"></span><span class="count">tap to open · your brief</span></summary>
+    <p class="sec-intro">This is the shape we planned to. The stays above are picked to fit it — <b>romantic views were a must</b>, so that's the thread running through them.</p>
+    <div class="qs" id="recap"></div>
+  </details>
 
   <footer>
     <div class="fwave" aria-hidden="true"></div>
@@ -413,12 +482,20 @@ const stays = [
     bnb:`Prefer self-catering? <b>Browse Airbnb</b> for a quinta cottage near <b>Pinhão / Peso da Régua</b> with a valley view and pool — <a class="maplink" target="_blank" rel="noopener" href="https://www.airbnb.com/s/Douro-Valley--Portugal/homes">open the Douro on Airbnb →</a>` },
 
   { city:"Lisbon", emoji:"🌉", sub:"29–30 June · 1 functional night · airport-side bookend",
-    note:`Just one airport-side night before E's 07:10 flight (both options ~15 min from the airport). H has a full last day on the 30th — so we'll ask the stay for <b>late checkout / luggage storage</b>.`,
+    note:`Just one airport-side night before E's 07:10 flight (all ~15 min from the airport — Lisbon's airport sits right by the centre, so a charming base costs no extra transfer). H has a full last day on the 30th — so we'll ask the stay for <b>late checkout / luggage storage</b>.`,
     options:[
       { name:"Memmo Alfama", rate:"4.6", ct:"991", book:"9.3", bookCt:"1006", price:"~€300–450/nt", tier:"value", top:true,
         vibe:`Alfama soul and one of the best sunset spots in the city.`,
         blurb:`Intimate boutique in the heart of <b>Alfama</b>, with a rooftop pool/bar over the river.`,
         tradeoff:`Alfama's lanes are steep and stepped — charming, but not the easiest with luggage.`, q:"Memmo Alfama Lisbon" },
+      { name:"The Ivens, Autograph Collection", rate:"4.7", ct:"613", book:"9.4", bookCt:"371", price:"~€450–550/nt", tier:"splurge",
+        vibe:`Dead-central design-luxury — explorer-themed glamour in Chiado.`,
+        blurb:`A 5-star in the heart of <b>Chiado</b>: warm, maximalist rooms (some with <b>balconies &amp; river views</b>), three eateries and a buzzy bar — steps from everything.`,
+        tradeoff:`The priciest of the central picks; lively Chiado streets, not quiet.`, q:"The Ivens Hotel Chiado Lisbon" },
+      { name:"Valverde Hotel &amp; Garden", rate:"4.7", ct:"487", book:"9.0", bookCt:"305", price:"~€350–450/nt", tier:"splurge",
+        vibe:`The romantic-calm pick — a Relais &amp; Châteaux townhouse with a secret garden.`,
+        blurb:`An elegant <b>Relais &amp; Châteaux</b> on Avenida da Liberdade: curated art, warm interiors and a serene <b>courtyard garden with a plunge pool</b> — a hushed retreat off the grand avenue.`,
+        tradeoff:`<b>No river view</b> — its romance is the garden &amp; service, not a vista.`, q:"Valverde Lisboa Hotel Garden Lisbon" },
       { name:"Verride Palácio Santa Catarina", rate:"4.6", ct:"379", book:"9.1", bookCt:"238", price:"~€450–700/nt", tier:"splurge",
         vibe:`Genuine wow — a palace finish to the trip.`,
         blurb:`An 18th-c palace with a <b>rooftop pool and sweeping Tagus views</b> — ornate and sophisticated.`,
