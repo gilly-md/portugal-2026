@@ -124,10 +124,12 @@
   .badge{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:1.5rem;background:rgba(27,79,138,.1);box-shadow:0 0 0 1px rgba(27,79,138,.22) inset;}
   .card-main h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:1.36rem;margin:0 0 3px;color:var(--azul-deep);}
   .card-sub{font-size:.8rem;color:var(--ink-soft);}
+  .card-sub::after{content:"Tap to open ›";display:block;margin-top:5px;font-size:.7rem;font-style:italic;color:var(--terra-deep);}
+  .card.open > .card-top .card-sub::after{content:none;}
   .card-toggle{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid rgba(27,79,138,.3);background:var(--cream);display:grid;place-items:center;color:var(--azul);font-size:1.5rem;line-height:1;transition:transform .3s,background .2s;}
-  .card.open .card-toggle{transform:rotate(135deg);background:var(--azul);color:#fff;}
+  .card.open > .card-top .card-toggle{transform:rotate(135deg);background:var(--azul);color:#fff;}
   .detail-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease;}
-  .card.open .detail-wrap{grid-template-rows:1fr;}
+  .card.open > .detail-wrap{grid-template-rows:1fr;}
   .detail{overflow:hidden;}
   .detail-inner{padding:2px 20px 22px;border-top:1px dashed rgba(27,79,138,.18);}
   .block{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid rgba(27,79,138,.08);}
@@ -288,6 +290,15 @@
   @keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(176,74,50,.55);}70%{box-shadow:0 0 0 12px rgba(176,74,50,0);}100%{box-shadow:0 0 0 0 rgba(176,74,50,0);}}
   @media (max-width:560px){
+    /* stacked week table — 4 fixed cols cramp "The move" on phones; restack as labelled rows */
+    .skeleton thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);}
+    .skeleton table,.skeleton tbody,.skeleton tr,.skeleton td{display:block;width:100%;}
+    .skeleton tr{padding:14px 16px;border-top:1px solid rgba(27,79,138,.14);}
+    .skeleton tr:first-child{border-top:none;}
+    .skeleton tbody tr:nth-child(even){background:rgba(95,122,72,.05);}
+    .skeleton td{border-top:none!important;padding:3px 0;display:grid;grid-template-columns:84px 1fr;gap:10px;align-items:baseline;}
+    .skeleton td::before{content:attr(data-label);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;padding-top:2px;}
+    .skeleton td .base{font-size:1.02rem;}
     .panel{padding:34px 24px 30px;}
     .card-top{grid-template-columns:auto 1fr;}
     .card-toggle{grid-column:1 / -1;justify-self:end;margin-top:-8px;}
@@ -340,16 +351,16 @@
     <table>
       <thead><tr><th>Dates</th><th>Base</th><th>Nights</th><th>The move</th></tr></thead>
       <tbody>
-        <tr><td>24–27 Jun</td><td><span class="base">Porto</span></td><td class="nts">3</td><td>Land Lisbon (E ~17:55 (to confirm) · H 20:55) → push on to Porto that night</td></tr>
-        <tr><td>27–29 Jun</td><td><span class="base">Douro Valley</span></td><td class="nts">2</td><td>Drive Porto → Douro</td></tr>
-        <tr><td>29–30 Jun</td><td><span class="base">Lisbon</span></td><td class="nts">1</td><td>Drive Douro → Lisbon (airport-side) · depart 30th (E 07:10 · H bonus full day, flies 22:15)</td></tr>
+        <tr><td data-label="Dates">24–27 Jun</td><td data-label="Base"><span class="base">Porto</span></td><td class="nts" data-label="Nights">3</td><td data-label="The move">Land Lisbon (E ~17:55 (to confirm) · H 20:55) → push on to Porto that night</td></tr>
+        <tr><td data-label="Dates">27–29 Jun</td><td data-label="Base"><span class="base">Douro Valley</span></td><td class="nts" data-label="Nights">2</td><td data-label="The move">Drive Porto → Douro</td></tr>
+        <tr><td data-label="Dates">29–30 Jun</td><td data-label="Base"><span class="base">Lisbon</span></td><td class="nts" data-label="Nights">1</td><td data-label="The move">Drive Douro → Lisbon (airport-side) · depart 30th (E 07:10 · H bonus full day, flies 22:15)</td></tr>
       </tbody>
     </table>
   </div>
 
   <!-- PORTO HUB (collapsible · base is booked) -->
   <article class="card" id="porto-hub">
-    <div class="card-top" role="button" tabindex="0" aria-expanded="true" aria-controls="porto-hub-detail" aria-label="Porto — your booked base, things to do and where to eat">
+    <div class="card-top" role="button" tabindex="0" aria-expanded="false" aria-controls="porto-hub-detail" aria-label="Porto — your booked base, things to do and where to eat">
       <div class="badge" aria-hidden="true">🏰</div>
       <div class="card-main"><h3>Porto</h3><div class="card-sub">Your base is booked · things to do · eat &amp; drink</div></div>
       <div class="card-toggle" aria-hidden="true">+</div>
@@ -772,9 +783,9 @@ function wireToggle(el){
   top.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); set(); } });
 }
 
-// Master Porto hub — same collapse mechanic at section scale; default expanded.
+// Master Porto hub — same collapse mechanic at section scale; collapsed on load (click to open).
 const portoHub = document.getElementById("porto-hub");
-if(portoHub){ portoHub.classList.add("open"); wireToggle(portoHub); }
+if(portoHub){ wireToggle(portoHub); }
 
 const TIER = { value:"Value", splurge:"Splurge", historic:"Historic" };
 const optRow = o=>`
