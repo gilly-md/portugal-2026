@@ -94,6 +94,7 @@
   .routemap .leg .km{color:var(--ink-soft);font-size:.8rem;}
   .routemap .total{text-align:center;margin:14px 0 2px;font-size:.82rem;color:var(--ink-soft);font-style:italic;}
   .sec-intro{color:var(--ink-soft);font-size:.98rem;margin:-4px 0 4px;text-wrap:pretty;}
+  .credit{font-style:italic;font-size:.86rem;color:var(--ink-soft);opacity:.85;}
   .sec-intro b{color:var(--ink);}
   .disclaimer{background:rgba(185,132,42,.13);border:1px solid rgba(185,132,42,.34);border-radius:11px;padding:11px 15px;font-size:.86rem;color:var(--ink);margin:4px 0 2px;}
   .disclaimer b{color:#7a5610;}
@@ -164,6 +165,33 @@
   .istag{display:inline-flex;align-items:center;gap:5px;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-deep);background:rgba(176,74,50,.12);border:1px solid rgba(176,74,50,.3);border-radius:999px;padding:2px 9px;white-space:nowrap;}
   /* top pick highlight in Douro */
   .pick-tag.top{color:var(--port);background:rgba(123,47,58,.14);}
+  /* walkable-from-base flag (Porto things-to-do) */
+  .pick-tag.walk{color:#4d5733;background:rgba(95,122,72,.16);}
+  /* the one book-ahead item gets warm weight */
+  .pick-row.ahead{background:linear-gradient(180deg,#fff7ec,#fdeede);border:1px solid rgba(176,74,50,.28);border-radius:12px;padding:12px 14px;margin-top:8px;}
+  .pick-row.ahead:last-child{padding-bottom:12px;}
+  .pick-tag.book-ahead{color:#fff;background:var(--terra);}
+
+  /* ---------- BOOKED / CONFIRMED (The Rebello) ---------- */
+  .booked-badge{display:inline-flex;align-items:center;gap:5px;font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#33602f;background:rgba(95,122,72,.18);border:1px solid rgba(95,122,72,.45);border-radius:999px;padding:3px 10px;white-space:nowrap;}
+  .booked-card{background:linear-gradient(180deg,#f4f8ef,var(--paper));border:1px solid rgba(95,122,72,.32);border-radius:14px;padding:18px 20px;box-shadow:0 0 0 1px rgba(95,122,72,.16),0 12px 30px -22px rgba(51,96,47,.55);position:relative;}
+  .booked-card .bk-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+  .booked-card .bk-name{font-family:"DM Serif Display",serif;font-weight:400;font-size:1.34rem;color:var(--azul-deep);margin:0;}
+  .booked-card .bk-loc{font-size:.82rem;color:var(--ink-soft);margin:4px 0 0;}
+  .booked-card .bk-why{margin:12px 0 0;font-size:.97rem;color:var(--ink);}
+  .booked-card .bk-meta{display:flex;flex-wrap:wrap;gap:8px;margin:13px 0 0;}
+  .bk-chip{font-size:.74rem;font-weight:600;color:var(--ink);background:var(--cream);border:1px solid rgba(27,79,138,.2);border-radius:999px;padding:4px 11px;display:inline-flex;gap:6px;align-items:center;}
+  .bk-chip .rate{color:var(--verde);}
+  .bk-chip .book{color:var(--azul-deep);}
+  .porto-intro{color:var(--ink-soft);font-size:.97rem;margin:2px 0 16px;text-wrap:pretty;}
+  .porto-intro b{color:var(--ink);}
+  .porto-sub-h{display:flex;align-items:center;gap:11px;margin:26px 0 10px;}
+  .porto-sub-h .pgem{width:11px;height:11px;background:var(--azul);transform:rotate(45deg);border-radius:2px;flex:none;box-shadow:0 0 0 2px rgba(27,79,138,.16);}
+  .porto-sub-h h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:1.32rem;margin:0;color:var(--azul-deep);}
+  .porto-sub-h .rule{flex:1;height:0;border-top:2px dotted rgba(27,79,138,.28);}
+  .porto-sub-h .count{font-size:.8rem;color:var(--terra-deep);font-style:italic;}
+  .porto-sub-intro{color:var(--ink-soft);font-size:.95rem;margin:-2px 0 4px;text-wrap:pretty;}
+  .porto-sub-intro b{color:var(--ink);}
 
   /* ---------- WEATHER ---------- */
   .wx-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(84px,1fr));gap:8px;}
@@ -289,7 +317,7 @@
       </svg>
       <div class="eyebrow">A Romantic Escape · Porto · Douro · Lisboa</div>
       <h1>Portugal,<br><em>for two</em></h1>
-      <p class="sub">Six nights along the north — Porto's riverside, the vineyards of the Douro, and a little Lisbon light. Late June, unhurried, and built around the two of you. <b>This page is for choosing your stays</b> — pick one per base, and we'll build the day-by-day around what you choose.</p>
+      <p class="sub">Six nights along the north — Porto's riverside, the vineyards of the Douro, and a little Lisbon light. Late June, unhurried, and built around the two of you. <b>Porto is booked</b> — what's left is choosing your Douro &amp; Lisbon stays, and we'll build the day-by-day around them.</p>
       <div class="facts">
         <span class="fact"><span>🗓️</span><b>24 – 30 June 2026</b></span>
         <span class="fact"><span>💙</span>For H &amp; E</span>
@@ -305,9 +333,62 @@
   <div id="wx" class="wx-loading">Loading live forecast…</div>
   <div class="wx-status" id="wx-status" hidden></div>
 
-  <!-- CHOOSE YOUR STAYS -->
-  <section class="sec-head"><span class="gem"></span><h2>Choose your stays</h2><span class="rule"></span><span class="count">tap a base · pick one each</span></section>
-  <p class="sec-intro">Two to three options per base, tiered <b>value</b> vs <b>splurge</b> — each with its real Google rating, an indicative price, the vibe, and the honest tradeoff. Pick the one that feels like you for each base and tell Wilma; that locks the day-by-day.</p>
+  <!-- WEEK -->
+  <section class="sec-head"><span class="gem"></span><h2>The shape of the week</h2><span class="rule"></span><span class="count">flights fixed · nights flexible</span></section>
+  <p class="sec-intro">Flights and car are <b>booked</b>; Lisbon is the airport bookend in and out, so the heart of the trip sits in <b>Porto + the Douro</b>. One note: a true even Porto/Douro split isn't possible — <b>E's 07:10 flight on the 30th forces an airport-side Lisbon night on the 29th</b>.</p>
+  <div class="skeleton">
+    <table>
+      <thead><tr><th>Dates</th><th>Base</th><th>Nights</th><th>The move</th></tr></thead>
+      <tbody>
+        <tr><td>24–27 Jun</td><td><span class="base">Porto</span></td><td class="nts">3</td><td>Land Lisbon (E ~17:55 (to confirm) · H 20:55) → push on to Porto that night</td></tr>
+        <tr><td>27–29 Jun</td><td><span class="base">Douro Valley</span></td><td class="nts">2</td><td>Drive Porto → Douro</td></tr>
+        <tr><td>29–30 Jun</td><td><span class="base">Lisbon</span></td><td class="nts">1</td><td>Drive Douro → Lisbon (airport-side) · depart 30th (E 07:10 · H bonus full day, flies 22:15)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PORTO HUB (collapsible · base is booked) -->
+  <article class="card" id="porto-hub">
+    <div class="card-top" role="button" tabindex="0" aria-expanded="true" aria-controls="porto-hub-detail" aria-label="Porto — your booked base, things to do and where to eat">
+      <div class="badge" aria-hidden="true">🏰</div>
+      <div class="card-main"><h3>Porto</h3><div class="card-sub">Your base is booked · things to do · eat &amp; drink</div></div>
+      <div class="card-toggle" aria-hidden="true">+</div>
+    </div>
+    <div class="detail-wrap" id="porto-hub-detail"><div class="detail"><div class="detail-inner">
+      <p class="porto-intro">Your base is <b>The Rebello</b>, in Gaia right on the river by the Dom Luís bridge — everything below is chosen around it. 🚶 marks what's walkable from your door.</p>
+
+      <!-- Your Porto base — The Rebello (CONFIRMED) -->
+      <div class="booked-card">
+        <div class="bk-head">
+          <span class="booked-badge">✓ Booked</span>
+          <h4 class="bk-name">The Rebello, Hotel &amp; Spa</h4>
+        </div>
+        <p class="bk-loc">📍 Vila Nova de Gaia · riverside by the Dom Luís I bridge <a class="maplink" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Rebello%20Hotel%20Spa%20Vila%20Nova%20de%20Gaia">📍 Maps</a></p>
+        <p class="bk-why">Your <b>wow 5-star base</b> — design-luxury suites on the Gaia waterfront, with <b>river &amp; Dom Luís bridge views</b> and a spa. It's the still point you come back to each evening, two minutes from the sunset hills and a bridge-walk from the old town.</p>
+        <div class="bk-meta">
+          <span class="bk-chip">🌉 River &amp; bridge views</span>
+          <span class="bk-chip">💆 Spa</span>
+          <span class="bk-chip">⭐ 5-star design-luxury</span>
+          <span class="bk-chip"><span class="rate">G ⭐4.7</span> / 655</span>
+          <span class="bk-chip"><span class="book">Booking 9.4</span> / 1802</span>
+        </div>
+      </div>
+
+      <!-- See & do in Porto (nested) -->
+      <div class="porto-sub-h"><span class="pgem"></span><h3>See &amp; do in Porto</h3><span class="rule"></span><span class="count">browse &amp; pick · not a fixed plan</span></div>
+      <p class="porto-sub-intro">A shortlist of the <b>romantic Porto sights</b> — sunsets and old-town wandering — most of them walkable from your door. ★ marks our pick in each group. <b>Look through, mark what calls to you</b>, and we'll lightly shape the days around them — no hour-by-hour plan. <span class="credit">Ratings are Google, checked 19 Jun 2026.</span></p>
+      <div id="porto-todo"></div>
+
+      <!-- Eat & drink in Porto (nested) -->
+      <div class="porto-sub-h"><span class="pgem"></span><h3>Eat &amp; drink in Porto</h3><span class="rule"></span><span class="count">browse &amp; pick · a shortlist</span></div>
+      <p class="porto-sub-intro">A curated <b>eat-&amp;-drink shortlist</b> — port-house tastings, wine bars, romantic dinners, local bites and a nightcap — grouped to browse. ★ marks our pick; €–€€€€ shows price where known. <b>Most of Porto's best dinners close Sun &amp; Mon</b> — your Porto days (Wed–Fri) are clear. <span class="credit">Picks from a local guide, cross-checked live on Google, 19 Jun 2026.</span></p>
+      <div id="porto-eat"></div>
+    </div></div></div>
+  </article>
+
+  <!-- CHOOSE YOUR STAYS (Douro & Lisbon — still open) -->
+  <section class="sec-head"><span class="gem"></span><h2>Choose your stays</h2><span class="rule"></span><span class="count">Douro &amp; Lisbon · pick one each</span></section>
+  <p class="sec-intro">Porto is booked (The Rebello, above) — these are the <b>two still-open decisions</b>. Options per base tiered <b>value</b> vs <b>splurge</b>, each with its real Google rating, an indicative price, the vibe, and the honest tradeoff. Pick the one that feels like you for each and tell Wilma; that locks the day-by-day.</p>
   <p class="disclaimer">⚑ <b>Prices are indicative for late-June peak</b> — a snapshot to compare on, not a quote. We confirm the live price for your exact dates before you book.</p>
   <div id="stays"></div>
 
@@ -324,26 +405,12 @@
   <div id="flights"></div>
   <p class="leg-note">Live status appears ~24h before each flight. <b>E's outbound arrival (17:55) is to be reconfirmed with the airline</b> — the booking sheet was ambiguous.</p>
 
-  <!-- WEEK -->
-  <section class="sec-head"><span class="gem"></span><h2>The shape of the week</h2><span class="rule"></span><span class="count">flights fixed · nights flexible</span></section>
-  <p class="sec-intro">Flights and car are <b>booked</b>; Lisbon is the airport bookend in and out, so the heart of the trip sits in <b>Porto + the Douro</b>. One note: a true even Porto/Douro split isn't possible — <b>E's 07:10 flight on the 30th forces an airport-side Lisbon night on the 29th</b>.</p>
-  <div class="skeleton">
-    <table>
-      <thead><tr><th>Dates</th><th>Base</th><th>Nights</th><th>The move</th></tr></thead>
-      <tbody>
-        <tr><td>24–27 Jun</td><td><span class="base">Porto</span></td><td class="nts">3</td><td>Land Lisbon (E ~17:55 (to confirm) · H 20:55) → push on to Porto that night</td></tr>
-        <tr><td>27–29 Jun</td><td><span class="base">Douro Valley</span></td><td class="nts">2</td><td>Drive Porto → Douro</td></tr>
-        <tr><td>29–30 Jun</td><td><span class="base">Lisbon</span></td><td class="nts">1</td><td>Drive Douro → Lisbon (airport-side) · depart 30th (E 07:10 · H bonus full day, flies 22:15)</td></tr>
-      </tbody>
-    </table>
-  </div>
-
   <!-- NEXT -->
   <section class="sec-head"><span class="gem"></span><h2>Next: pick your stays</h2><span class="rule"></span><span class="count">then we build your day-by-day</span></section>
   <div class="nextnote">
     <div class="nextnote-h">🗺️ The day-by-day comes after you choose</div>
-    <p>This draft is deliberately just the <b>stays decision</b> — there's no hour-by-hour plan yet, on purpose. Once you've picked one stay per base (Porto · Douro · Lisbon) and told Wilma, we'll build the day-by-day around your choices: the winery day, a beach day, walks and tascas, sunsets, and the drive times worked out around your rooms.</p>
-    <p class="nextnote-step"><span class="step-pill">1</span> Pick a stay per base above <span class="step-arrow">→</span> <span class="step-pill">2</span> Tell Wilma your three <span class="step-arrow">→</span> <span class="step-pill">3</span> We confirm live prices &amp; book <span class="step-arrow">→</span> <span class="step-pill">4</span> Your day-by-day is built</p>
+    <p>This draft is deliberately just the <b>stays decision</b> — there's no hour-by-hour plan yet, on purpose. Porto's booked (The Rebello); once you've picked your <b>Douro</b> and <b>Lisbon</b> stays and told Wilma, we'll build the day-by-day around your choices: the winery day, a beach day, walks and tascas, sunsets, and the drive times worked out around your rooms.</p>
+    <p class="nextnote-step"><span class="step-pill">1</span> Pick your Douro &amp; Lisbon stays above <span class="step-arrow">→</span> <span class="step-pill">2</span> Tell Wilma your two <span class="step-arrow">→</span> <span class="step-pill">3</span> We confirm live prices &amp; book <span class="step-arrow">→</span> <span class="step-pill">4</span> Your day-by-day is built</p>
   </div>
 
   <!-- ROUTE MAP (collapsible) -->
@@ -442,23 +509,6 @@ const pin = "📍";
 // Each option: name, rate (Google ★ + count), price (indicative), tier, vibe, tradeoff, q (Maps).
 // top:true marks our recommended pick for that base.
 const stays = [
-  { city:"Porto", emoji:"🏰", sub:"24–27 June · 3 nights · riverside · the heart of the trip",
-    options:[
-      { name:"The Rebello, Hotel &amp; Spa", rate:"4.7", ct:"655", book:"9.4", bookCt:"1802", price:"~€350–550/nt", tier:"splurge", top:true,
-        vibe:`Her pick — and the benchmark for the whole trip.`,
-        blurb:`Gaia's waterfront, a Small Luxury Hotel: rooftop bar &amp; spa, <b>panoramic Douro &amp; Dom Luís bridge views</b>, and large design suites in restored riverside buildings.`,
-        tradeoff:`Across the river in Gaia — a short bridge walk to the old town.`, q:"The Rebello Hotel Spa Vila Nova de Gaia" },
-      { name:"Torel 1884 Suites &amp; Apartments", rate:"4.8", ct:"359", book:"9.4", bookCt:"815", price:"~€300–450/nt", tier:"splurge",
-        vibe:`A city-heart alternative — same luxury tier, different setting.`,
-        blurb:`A polished boutique in an 1800s building, with suites and apartments, in the <b>downtown heart</b> (Mouzinho da Silveira).`,
-        tradeoff:`Downtown, <b>not riverfront</b> — doesn't have Rebello's river view.`, q:"Torel 1884 Suites Apartments Porto" },
-      { name:"Torel Saboaria", rate:"4.9", ct:"245", book:"9.6", bookCt:"1623", price:"~€300–450/nt", tier:"splurge",
-        vibe:`Five-star design-luxury in a restored soap factory — Torel's newest Porto address.`,
-        blurb:`A polished 5-star in central Porto (Bonjardim, by the <b>Bolhão</b> market): stylish rooms, a <b>spa</b>, and an acclaimed restaurant, in a former soap factory.`,
-        tradeoff:`Central but <b>not riverfront</b> — no river view; its draw is the spa &amp; design.`, q:"Torel Saboaria Porto" },
-    ],
-    bnb:`Rather an apartment than a hotel? <b>Browse Airbnb</b> for a river-facing flat with a terrace in <b>Ribeira</b> or <b>Cais de Gaia</b> — <a class="maplink" target="_blank" rel="noopener" href="https://www.airbnb.com/s/Ribeira--Porto--Portugal/homes">open Porto on Airbnb →</a>` },
-
   { city:"Douro Valley", emoji:"🍇", sub:"27–29 June · 2 nights · vineyards · river-gorge country",
     intro:`Each of these sits on the <b>terraced river gorge</b> with a winery on-site — the river view is a given here, unlike the earlier Vinho-Verde pick.`,
     options:[
@@ -504,6 +554,207 @@ const stays = [
     bnb:`Rather an apartment? <b>Príncipe Real</b> for rooftop-terrace flats over the river, <b>Alfama</b> for 18th-c character — <a class="maplink" target="_blank" rel="noopener" href="https://www.airbnb.com/s/Alfama--Lisbon--Portugal/homes">open Lisbon on Airbnb →</a>` },
 ];
 
+// Porto things-to-do — browse & pick, grouped by theme. Mirrors the stays pattern.
+// Each item: name, rate "G⭐x.x/n" (omit for ungated free spots), vibe (honest note),
+// walk:true if walkable from The Rebello, top:true = our pick, ahead:true = book-ahead weight.
+const portoTodo = [
+  { group:"Sunsets & views", emoji:"🌅", sub:"her #1 — romantic views a must",
+    intro:`Late-June sunset is ~21:00, so golden hour is a proper evening event. These are the spots to be for it.`,
+    items:[
+      { name:"Jardim do Morro", top:true, walk:true,
+        vibe:`The reliable sunset-wine spot — an ungated hilltop just over the bridge, 2 min from The Rebello; locals bring wine at golden hour. Free.`,
+        q:"Jardim do Morro Vila Nova de Gaia" },
+      { name:"Miradouro da Serra do Pilar", rate:"4.8", ct:"2262", top:true, walk:true,
+        vibe:`Best single panorama of Porto and the bridge, directly above the hotel. Open 24h, free.`,
+        q:"Miradouro da Serra do Pilar" },
+      { name:"Jardins do Palácio de Cristal", rate:"4.6", ct:"47543",
+        vibe:`Terraced gardens, peacocks and Douro views — an unhurried daytime walk. Open to 21:00.`,
+        q:"Jardins do Palacio de Cristal Porto" },
+    ] },
+
+  { group:"Wander & charm", emoji:"🚶", sub:"old-town lanes & landmarks",
+    items:[
+      { name:"Ribeira riverfront", walk:true,
+        vibe:`The medieval riverside lanes across the water — an evening stroll plus a riverside tasca dinner. Walkable across the bridge.`,
+        q:"Ribeira Porto" },
+      { name:"São Bento station", rate:"4.7", ct:"5317",
+        vibe:`The azulejo tile hall — quick, beautiful, always open.`,
+        q:"Sao Bento Railway Station Porto" },
+      { name:"Livraria Lello", rate:"4.0", ct:"86218",
+        vibe:`Iconic art-nouveau bookshop, but the 4.0 across 86k reviews <b>is the crowd</b>; timed ticket. Worth it <b>only the first slot of the morning</b>, otherwise skip. Closed Mon & Tue — your dates are fine (in Porto from Wed 24 Jun).`,
+        q:"Livraria Lello Porto" },
+      { name:"Foz do Douro",
+        vibe:`Where the river meets the Atlantic — a promenade, the Felgueiras lighthouse, a quieter sunset, and a toe-dip for her "beach day."`,
+        q:"Foz do Douro Porto" },
+    ] },
+];
+
+const todoRow = o=>`
+  <div class="pick-row${o.ahead?' ahead':''}">
+    <div class="pick-h">
+      ${o.top?`<span class="pick-tag top">★ Our pick</span>`:``}
+      ${o.ahead?`<span class="pick-tag book-ahead">⏰ Book ahead</span>`:``}
+      <b>${o.name}</b>
+      ${o.rate?`<span class="rate">G ⭐${o.rate}<span class="ct">/${o.ct}</span></span>`:`<span class="pick-tag pin">${pin} free spot</span>`}
+      ${o.walk?`<span class="pick-tag walk">🚶 walkable from The Rebello</span>`:``}
+    </div>
+    <p class="pick-b">${o.vibe} <a class="maplink" target="_blank" rel="noopener" href="${M(o.q)}">${pin} Maps</a></p>
+  </div>`;
+
+const todoWrap = document.getElementById("porto-todo");
+portoTodo.forEach((g,i)=>{
+  const el=document.createElement("article");
+  el.className="card"; el.style.animationDelay=(0.05+i*0.05)+"s";
+  const introBlock = g.intro ? `<div class="block"><div class="ico alt">🌄</div><div><div class="label">Good to know</div><p>${g.intro}</p></div></div>` : "";
+  el.innerHTML=`
+    <div class="card-top" role="button" tabindex="0" aria-expanded="false" aria-controls="t${i}" aria-label="${g.group} — see options">
+      <div class="badge" aria-hidden="true">${g.emoji}</div>
+      <div class="card-main"><h3>${g.group}</h3><div class="card-sub">${g.sub}</div></div>
+      <div class="card-toggle" aria-hidden="true">${plus}</div>
+    </div>
+    <div class="detail-wrap" id="t${i}"><div class="detail"><div class="detail-inner">
+      ${introBlock}
+      <div class="block"><div class="ico pick">★</div><div>
+        <div class="label">The options</div>${g.items.map(todoRow).join("")}
+      </div></div>
+    </div></div></div>`;
+  wireToggle(el);
+  todoWrap.appendChild(el);
+});
+
+// Porto eat & drink — browse & pick, grouped by theme. Mirrors the things-to-do pattern.
+// Each item: name, rate "G⭐x.x/n" (omit if none), price "€"–"€€€€" (omit if unknown), vibe (honest note),
+// walk:true only where flagged, top:true = our pick, ahead:true = book-ahead weight.
+const portoEat = [
+  { group:"Port houses & tastings", emoji:"🍷", sub:"on the Gaia doorstep",
+    items:[
+      { name:"Taylor's", rate:"4.4", ct:"2907", top:true, walk:true,
+        vibe:`Rose-garden terrace tasting with Ribeira/Douro views. The low-ish score is dragged by gripes about the €25 QR audio tour, not the wine — <b>skip the audio tour, just do the tasting + garden</b> and it's a 5★ romantic afternoon. Closes 18:15.`,
+        q:"Taylor's Port Cellars Vila Nova de Gaia" },
+      { name:"Kopke", rate:"4.6", ct:"650", walk:true,
+        vibe:`The cocoon alternative — an intimate, hushed indoor tasting room over the Douro; port priced by age with a chocolate pairing, air-conditioned. Open to 19:00.`,
+        q:"Kopke Porto Wine House Vila Nova de Gaia" },
+      { name:"Graham's", rate:"4.6", ct:"1911", walk:true,
+        vibe:`A classic cellar — <b>tastings by appointment only</b>, closes 17:30. Walkable-ish (uphill in Gaia).`,
+        q:"Graham's Port Lodge Vila Nova de Gaia" },
+    ] },
+
+  { group:"Wine bars", emoji:"🍷", sub:"romantic — their wine love",
+    intro:`Open late afternoon and made for two — the romantic ones fill fast, so book the ones marked.`,
+    items:[
+      { name:"de Lima's Wine Bar", rate:"5.0", ct:"279", top:true, ahead:true,
+        vibe:`Reservation-only, intimate sommelier-led tasting; warm host, beginner-friendly.`,
+        q:"de Lima's Wine Bar Porto" },
+      { name:"Capela Incomum", rate:"4.5", ct:"2055", price:"€€", top:true, ahead:true,
+        vibe:`A 19th-century chapel turned wine bar — grapevines where the saints were; tucked-away, quiet, romantic. Opens 16:30 (Sun 14:00).`,
+        q:"Capela Incomum Porto" },
+      { name:"Wine Quay Bar", rate:"4.6", ct:"1689", price:"€€", walk:true,
+        vibe:`Riverfront wine + Ribeira/Douro views — "you go for the spot." Cash only; closed Sun; opens 16:00. Across the bridge in Ribeira.`,
+        q:"Wine Quay Bar Porto" },
+      { name:"Prova", rate:"4.8", ct:"1094", price:"€€",
+        vibe:`50 wines by the glass, notable Portuguese producers.`,
+        q:"Prova Wine Food Pleasure Porto" },
+      { name:"Genuíno", rate:"4.8", ct:"660", price:"€€",
+        vibe:`Natural wine + genuinely good food, in the Art District.`,
+        q:"Genuíno Porto" },
+    ] },
+
+  { group:"Romantic dinners", emoji:"🥂", sub:"most closed Sun & Mon",
+    intro:`The special-occasion tables — most shut Sunday &amp; Monday, so they line up with your Wed–Fri Porto days. The starred ones book out.`,
+    items:[
+      { name:"The Yeatman — Gastronomic Restaurant", rate:"4.9", ct:"45", top:true, ahead:true, walk:true,
+        vibe:`2-Michelin, Porto/Douro view, honeymoon-grade reviews, a piano in the room. <b>Tue–Sat only, closed Sun & Mon, single seating 18:30–20:30.</b> Tiny room → books out; <b>reserve as soon as your Porto dates lock.</b> In Gaia, near The Rebello.`,
+        q:"The Yeatman Gastronomic Restaurant Vila Nova de Gaia" },
+      { name:"Fauno", rate:"4.9", ct:"254", top:true, ahead:true,
+        vibe:`Michelin-recognized seasonal tasting menu, standout wine pairings; reviewers book it for anniversaries. Tue–Sat 19:00–22:30.`,
+        q:"Fauno Porto" },
+      { name:"InDiferente", rate:"4.9", ct:"666",
+        vibe:`Refined tasting menu, excellent value, great wines by the glass. Tue–Sat evenings, west/Foz side.`,
+        q:"InDiferente Porto" },
+      { name:"ODE Porto Wine House", rate:"4.5", ct:"748", price:"€€€", top:true,
+        vibe:`"Grandmother's cooking" done beautifully, in a romantic stone-walled room near the river. Tue–Sat from 15:00.`,
+        q:"ODE Porto Wine House Porto" },
+      { name:"Euskalduna Studio", rate:"4.7", ct:"601", price:"€€€€", ahead:true,
+        vibe:`1-Michelin, 10-course seasonal — the intimate splurge alternative to The Yeatman.`,
+        q:"Euskalduna Studio Porto" },
+      { name:"Vinum", rate:"4.6", ct:"3156", price:"€€€", walk:true,
+        vibe:`At Graham's lodge in Gaia — Atlantic fish + Douro wine on a river-view terrace. Walkable-ish from The Rebello.`,
+        q:"Vinum at Graham's Vila Nova de Gaia" },
+      { name:"Casa de Chá da Boa Nova", rate:"4.6", ct:"1301", price:"€€€€", ahead:true,
+        vibe:`2-Michelin in a Siza-designed building on the ocean rocks (~20 min north, Leça) — a destination lunch with Atlantic views.`,
+        q:"Casa de Chá da Boa Nova Leça da Palmeira" },
+    ] },
+
+  { group:"Local bites & market", emoji:"🥪", sub:"Porto signatures",
+    items:[
+      { name:"Casa Guedes", rate:"4.5", ct:"19383", price:"€",
+        vibe:`The pernil — slow-roast pork + Serra cheese — sandwich institution.`,
+        q:"Casa Guedes Porto" },
+      { name:"Gazela", rate:"4.6", ct:"7153", price:"€",
+        vibe:`Cachorrinhos — the spicy little hot-dogs Bourdain loved.`,
+        q:"Gazela Cachorrinhos Porto" },
+      { name:"Fábrica da Nata", rate:"4.6", ct:"6615", price:"€",
+        vibe:`Warm pastéis de nata.`,
+        q:"Fábrica da Nata Porto" },
+      { name:"Mercado do Bolhão", rate:"4.5", ct:"34534",
+        vibe:`The restored market to wander and graze.`,
+        q:"Mercado do Bolhão Porto" },
+      { name:"Taberna dos Mercadores", rate:"4.5", ct:"3828", price:"€€", ahead:true,
+        vibe:`Tiny old-town tasca; books out — reserve.`,
+        q:"Taberna dos Mercadores Porto" },
+    ] },
+
+  { group:"Nightcap", emoji:"🍸", sub:"a drink after dinner",
+    items:[
+      { name:"Catraio", rate:"4.7", ct:"3088",
+        vibe:`Craft beer under rooftop string lights.`,
+        q:"Catraio Craft Beer Shop Porto" },
+      { name:"The Royal Cocktail Club", rate:"4.5", ct:"1744", price:"€€",
+        vibe:`Speakeasy-style cocktails.`,
+        q:"The Royal Cocktail Club Porto" },
+      { name:"BASE", rate:"4.5", ct:"5429", price:"€€",
+        vibe:`Garden bar with Clérigos Tower views — a sunset drink.`,
+        q:"BASE Porto" },
+      { name:"Torto", rate:"4.6", ct:"827", price:"€€",
+        vibe:`Cocktails + DJ, livelier.`,
+        q:"Torto Porto" },
+    ] },
+];
+
+const eatRow = o=>`
+  <div class="pick-row${o.ahead?' ahead':''}">
+    <div class="pick-h">
+      ${o.top?`<span class="pick-tag top">★ Our pick</span>`:``}
+      ${o.ahead?`<span class="pick-tag book-ahead">⏰ Book ahead</span>`:``}
+      <b>${o.name}</b>
+      ${o.rate?`<span class="rate">G ⭐${o.rate}<span class="ct">/${o.ct}</span></span>`:``}
+      ${o.price?`<span class="price">${o.price}</span>`:``}
+      ${o.walk?`<span class="pick-tag walk">🚶 walkable from The Rebello</span>`:``}
+    </div>
+    <p class="pick-b">${o.vibe} <a class="maplink" target="_blank" rel="noopener" href="${M(o.q)}">${pin} Maps</a></p>
+  </div>`;
+
+const eatWrap = document.getElementById("porto-eat");
+portoEat.forEach((g,i)=>{
+  const el=document.createElement("article");
+  el.className="card"; el.style.animationDelay=(0.05+i*0.05)+"s";
+  const introBlock = g.intro ? `<div class="block"><div class="ico alt">🌄</div><div><div class="label">Good to know</div><p>${g.intro}</p></div></div>` : "";
+  el.innerHTML=`
+    <div class="card-top" role="button" tabindex="0" aria-expanded="false" aria-controls="e${i}" aria-label="${g.group} — see options">
+      <div class="badge" aria-hidden="true">${g.emoji}</div>
+      <div class="card-main"><h3>${g.group}</h3><div class="card-sub">${g.sub}</div></div>
+      <div class="card-toggle" aria-hidden="true">${plus}</div>
+    </div>
+    <div class="detail-wrap" id="e${i}"><div class="detail"><div class="detail-inner">
+      ${introBlock}
+      <div class="block"><div class="ico pick">★</div><div>
+        <div class="label">The options</div>${g.items.map(eatRow).join("")}
+      </div></div>
+    </div></div></div>`;
+  wireToggle(el);
+  eatWrap.appendChild(el);
+});
+
 const recap = [
   { q:`Romantic means…`, hint:`Seclusion &amp; privacy · adventure together · sunsets &amp; views · great wine &amp; food. <b>Romantic views a must.</b>` },
   { q:`Pace`, hint:`Slow &amp; unhurried.` },
@@ -520,6 +771,10 @@ function wireToggle(el){
   top.addEventListener("click", set);
   top.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); set(); } });
 }
+
+// Master Porto hub — same collapse mechanic at section scale; default expanded.
+const portoHub = document.getElementById("porto-hub");
+if(portoHub){ portoHub.classList.add("open"); wireToggle(portoHub); }
 
 const TIER = { value:"Value", splurge:"Splurge", historic:"Historic" };
 const optRow = o=>`
