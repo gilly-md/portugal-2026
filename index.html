@@ -173,6 +173,8 @@
   .pick-row.ahead{background:linear-gradient(180deg,#fff7ec,#fdeede);border:1px solid rgba(176,74,50,.28);border-radius:12px;padding:12px 14px;margin-top:8px;}
   .pick-row.ahead:last-child{padding-bottom:12px;}
   .pick-tag.book-ahead{color:#fff;background:var(--terra);}
+  /* closed-Monday flag — the couple's only Lisbon dinner is a Monday */
+  .pick-tag.closed{color:var(--port);background:rgba(123,47,58,.12);}
 
   /* ---------- BOOKED / CONFIRMED (The Rebello) ---------- */
   .booked-badge{display:inline-flex;align-items:center;gap:5px;font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#33602f;background:rgba(95,122,72,.18);border:1px solid rgba(95,122,72,.45);border-radius:999px;padding:3px 10px;white-space:nowrap;}
@@ -283,6 +285,34 @@
   .nextnote-step{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px!important;color:var(--ink)!important;font-size:.9rem!important;font-weight:600;}
   .step-pill{font-family:"DM Serif Display",serif;width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--azul),var(--azul-deep));font-size:.85rem;flex:none;}
   .step-arrow{color:var(--terra);font-weight:700;}
+
+  /* ---------- FEEDBACK FORM ---------- */
+  .fb{background:var(--paper);border-radius:14px;margin-top:14px;padding:22px 22px 20px;box-shadow:0 0 0 2px var(--line),var(--shadow);}
+  .fb-grid{display:grid;gap:16px;margin-top:4px;}
+  .fb-field{display:flex;flex-direction:column;gap:6px;}
+  .fb-field label{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;}
+  .fb-field select,.fb-field textarea,.fb-field input{
+    width:100%;font-family:inherit;font-size:.97rem;color:var(--ink);
+    background:var(--cream);border:1px solid rgba(27,79,138,.26);border-radius:11px;
+    padding:11px 13px;transition:border-color .2s,box-shadow .2s;
+  }
+  .fb-field textarea{resize:vertical;min-height:74px;line-height:1.55;}
+  .fb-field select:focus,.fb-field textarea:focus,.fb-field input:focus{
+    outline:none;border-color:var(--azul);box-shadow:0 0 0 3px rgba(27,79,138,.16);
+  }
+  .fb-field::placeholder,.fb-field textarea::placeholder,.fb-field input::placeholder{color:var(--ink-soft);opacity:.75;}
+  .fb-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px;}
+  .fb-btn{flex:1 1 200px;min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:inherit;font-size:.95rem;font-weight:700;border-radius:999px;cursor:pointer;border:none;
+    padding:12px 20px;transition:transform .2s,box-shadow .2s,background .2s;}
+  .fb-btn.copy{color:var(--azul-deep);background:var(--cream);border:1px solid rgba(27,79,138,.34);box-shadow:0 8px 20px -14px rgba(18,58,102,.5);}
+  .fb-btn.copy:hover{transform:translateY(-1px);background:#fff;box-shadow:0 10px 24px -14px rgba(18,58,102,.6);}
+  .fb-btn.mail{color:#fff;background:linear-gradient(135deg,var(--terra),var(--terra-deep));box-shadow:0 8px 18px -10px rgba(176,74,50,.7);text-decoration:none;}
+  .fb-btn.mail:hover{transform:translateY(-1px);box-shadow:0 10px 22px -10px rgba(176,74,50,.8);}
+  .fb-btn:focus-visible{outline:2px solid var(--azul);outline-offset:2px;}
+  .fb-confirm{margin-top:14px;font-size:.9rem;font-weight:600;color:#33602f;background:rgba(95,122,72,.14);
+    border:1px solid rgba(95,122,72,.4);border-radius:11px;padding:11px 14px;display:none;}
+  .fb-confirm.show{display:block;animation:rise .35s both;}
 
   footer{text-align:center;margin-top:60px;color:var(--ink-soft);font-size:.85rem;}
   footer .fwave{height:24px;max-width:340px;margin:0 auto 22px;background-image:var(--wave);background-size:110px 24px;background-repeat:repeat-x;background-position:center;opacity:.55;}
@@ -439,6 +469,33 @@
     </div></div></div>
   </article>
 
+  <!-- LISBON HUB (collapsible · no booked base — stay still open) -->
+  <article class="card" id="lisbon-hub">
+    <div class="card-top" role="button" tabindex="0" aria-expanded="false" aria-controls="lisbon-hub-detail" aria-label="Lisbon — your airport bookend: a romantic last evening and a bonus solo day">
+      <div class="badge" aria-hidden="true">🌉</div>
+      <div class="card-main"><h3>Lisbon</h3><div class="card-sub">A romantic last evening · H's bonus solo day · stay still to pick</div></div>
+      <div class="card-toggle" aria-hidden="true">+</div>
+    </div>
+    <div class="detail-wrap" id="lisbon-hub-detail"><div class="detail"><div class="detail-inner">
+      <p class="porto-intro">Lisbon is your airport bookend — one shared romantic last evening (Mon 29), then H's bonus solo day (Tue 30). Your Lisbon stay is the one pick still open — choose it just below.</p>
+
+      <!-- A romantic last evening (nested) -->
+      <div class="porto-sub-h"><span class="pgem"></span><h3>A romantic last evening · Mon 29 Jun</h3><span class="rule"></span><span class="count">your shared night</span></div>
+      <p class="porto-sub-intro">A sunset and a glass, then the Lisbon soul in song — the send-off for the two of you. ★ marks our pick in each group. <span class="credit">Ratings are Google, checked 20 Jun 2026.</span></p>
+      <div id="lisbon-evening"></div>
+
+      <!-- Where to eat (nested) -->
+      <div class="porto-sub-h"><span class="pgem"></span><h3>Where to eat in Lisbon</h3><span class="rule"></span><span class="count">browse &amp; pick · a shortlist</span></div>
+      <p class="porto-sub-intro">From a Michelin splurge to a legendary seafood hall — grouped to browse. ★ marks our pick; €–€€€€ shows price where known. <b>Your only dinner here is Monday</b>, so ✕ closed Mon flags what's out for the night. <span class="credit">Ratings are Google, checked 20 Jun 2026.</span></p>
+      <div id="lisbon-eat"></div>
+
+      <!-- H's solo last day (nested) -->
+      <div class="porto-sub-h"><span class="pgem"></span><h3>H's solo last day · Tue 30 Jun</h3><span class="rule"></span><span class="count">coffee &amp; boutiques</span></div>
+      <p class="porto-sub-intro">E flies out at dawn, so H has a full last day — the good coffee and the city's best boutique shopping, all walkable. ★ marks our pick in each group. <span class="credit">Ratings are Google, checked 20 Jun 2026.</span></p>
+      <div id="lisbon-hila"></div>
+    </div></div></div>
+  </article>
+
   <!-- CHOOSE YOUR STAYS (Lisbon — still open) -->
   <section class="sec-head"><span class="gem"></span><h2>Choose your stays</h2><span class="rule"></span><span class="count">Lisbon · pick one</span></section>
   <p class="sec-intro">Porto and the Douro are both booked (The Rebello and Hotel Monverde, above) — the <b>Lisbon airport-night is the one still-open decision</b>. Options are tiered <b>value</b> vs <b>splurge</b>, each with its real Google rating, an indicative price, the vibe, and the honest tradeoff. Pick the one that feels like you and tell Wilma; that locks the day-by-day.</p>
@@ -464,6 +521,47 @@
     <div class="nextnote-h">🗺️ The day-by-day comes after you choose</div>
     <p>This draft is deliberately just the <b>last stay decision</b> — there's no hour-by-hour plan yet, on purpose. Porto and the Douro are booked (The Rebello and Hotel Monverde); once you've picked your <b>Lisbon</b> airport-night and told Wilma, we'll build the day-by-day around your choices: the winery day, the Douro-gorge day, a beach day, walks and tascas, sunsets, and the drive times worked out around your rooms.</p>
     <p class="nextnote-step"><span class="step-pill">1</span> Pick your Lisbon stay above <span class="step-arrow">→</span> <span class="step-pill">2</span> Tell Wilma your pick <span class="step-arrow">→</span> <span class="step-pill">3</span> We confirm the live price &amp; book <span class="step-arrow">→</span> <span class="step-pill">4</span> Your day-by-day is built</p>
+  </div>
+
+  <!-- FEEDBACK (no backend — clipboard + mailto) -->
+  <section class="sec-head"><span class="gem"></span><h2>Tell Gilly what you think</h2><span class="rule"></span><span class="count">review the ideas · send it back</span></section>
+  <p class="sec-intro">Look through the ideas above, then tell us what you loved, what to skip, and anything you're dreaming of — and send it to Gilly.</p>
+  <div class="fb">
+    <div class="fb-grid">
+      <div class="fb-field">
+        <label for="fb-stay">Which Lisbon stay?</label>
+        <select id="fb-stay">
+          <option value="">Not sure yet — Gilly, you pick</option>
+          <option value="Memmo Alfama">Memmo Alfama</option>
+          <option value="The Ivens, Autograph Collection">The Ivens, Autograph Collection</option>
+          <option value="Valverde Hotel &amp; Garden">Valverde Hotel &amp; Garden</option>
+          <option value="Verride Palácio Santa Catarina">Verride Palácio Santa Catarina</option>
+          <option value="__other__">Other… (type below)</option>
+        </select>
+        <input type="text" id="fb-stay-other" placeholder="Another hotel you'd prefer" style="display:none;margin-top:8px;">
+      </div>
+      <div class="fb-field">
+        <label for="fb-loved">What you loved</label>
+        <textarea id="fb-loved" placeholder="e.g. the Yeatman, the Douro gorge day, fado night…"></textarea>
+      </div>
+      <div class="fb-field">
+        <label for="fb-skip">Anything to skip</label>
+        <textarea id="fb-skip" placeholder="e.g. skip Lello, too touristy…"></textarea>
+      </div>
+      <div class="fb-field">
+        <label for="fb-req">Requests / dreaming of / questions</label>
+        <textarea id="fb-req" placeholder="e.g. can we add a cooking class? a spa afternoon?"></textarea>
+      </div>
+      <div class="fb-field">
+        <label for="fb-from">From</label>
+        <input type="text" id="fb-from" placeholder="your names" autocomplete="off" />
+      </div>
+    </div>
+    <div class="fb-actions">
+      <button type="button" class="fb-btn copy" id="fb-copy">📋 Copy my feedback</button>
+      <a class="fb-btn mail" id="fb-mail" href="#" role="button">✉️ Email to Gilly</a>
+    </div>
+    <div class="fb-confirm" id="fb-confirm" role="status" aria-live="polite"></div>
   </div>
 
   <!-- ROUTE MAP (collapsible) -->
@@ -627,7 +725,7 @@ const todoRow = o=>`
       ${o.top?`<span class="pick-tag top">★ Our pick</span>`:``}
       ${o.ahead?`<span class="pick-tag book-ahead">⏰ Book ahead</span>`:``}
       <b>${o.name}</b>
-      ${o.rate?`<span class="rate">G ⭐${o.rate}<span class="ct">/${o.ct}</span></span>`:`<span class="pick-tag pin">${pin} free spot</span>`}
+      ${o.rate?`<span class="rate">G ⭐${o.rate}<span class="ct">/${o.ct}</span></span>`:(o.free?`<span class="pick-tag pin">${pin} free spot</span>`:``)}
       ${o.walk?`<span class="pick-tag walk">🚶 walkable from The Rebello</span>`:``}
     </div>
     <p class="pick-b">${o.vibe} <a class="maplink" target="_blank" rel="noopener" href="${M(o.q)}">${pin} Maps</a></p>
@@ -761,6 +859,7 @@ const eatRow = o=>`
       <b>${o.name}</b>
       ${o.rate?`<span class="rate">G ⭐${o.rate}<span class="ct">/${o.ct}</span></span>`:``}
       ${o.price?`<span class="price">${o.price}</span>`:``}
+      ${o.monClosed?`<span class="pick-tag closed">✕ closed Mon</span>`:``}
       ${o.walk?`<span class="pick-tag walk">🚶 walkable from The Rebello</span>`:``}
     </div>
     <p class="pick-b">${o.vibe} <a class="maplink" target="_blank" rel="noopener" href="${M(o.q)}">${pin} Maps</a></p>
@@ -900,6 +999,140 @@ douroEat.forEach((g,i)=>{
   douroEatWrap.appendChild(el);
 });
 
+// ---- LISBON ----
+// Lisbon has no booked base (the stay is the one still-open pick, just below).
+// Three nested sub-sections, all rendered with eatRow (handles rate/ct/price/ahead/monClosed,
+// and degrades gracefully when rate & price are both absent). top:true = our pick.
+
+// A romantic last evening · Mon 29 Jun
+const lisbonEvening = [
+  { group:"Sunset & a nightcap", emoji:"🌅", sub:"golden hour over Alfama",
+    items:[
+      { name:"Miradouro das Portas do Sol", rate:"4.7", ct:"5486", top:true,
+        vibe:`The classic Alfama terrace over the rooftops and the river — a glass of wine as the light goes. Free.`,
+        q:"Miradouro das Portas do Sol Lisboa" },
+      { name:"Park", rate:"4.0", ct:"3181", price:"€€",
+        vibe:`A drink on a rooftop above Bairro Alto — cool and lively rather than intimate, but a great skyline send-off.`,
+        q:"Park rooftop bar Lisboa" },
+    ] },
+
+  { group:"Fado — the Lisbon soul", emoji:"🎶", sub:"the music for the last night",
+    items:[
+      { name:"Clube de Fado", rate:"4.4", ct:"4338", price:"€€€", top:true,
+        vibe:`The iconic fado-dinner in Alfama, and the music is genuinely moving. <b>Go for the fado</b> — reviews are clear the food is overpriced for what it is, so book the early seating and keep meal expectations modest. Open Mon 19:30.`,
+        q:"Clube de Fado Lisboa" },
+      { name:"Mesa de Frades", rate:"4.1", ct:"1136",
+        vibe:`A tiny former chapel, intensely atmospheric, with late sets — more raw and intimate, but hit-or-miss on food and service.`,
+        q:"Mesa de Frades Lisboa" },
+    ] },
+];
+
+// Where to eat in Lisbon
+const lisbonEat = [
+  { group:"Fancy & special", emoji:"✨", sub:"the fine-dining splurge",
+    items:[
+      { name:"Eleven", rate:"4.4", ct:"1128", price:"€€€€", ahead:true, top:true,
+        vibe:`1-Michelin with a panoramic hilltop-garden view over the city; refined Mediterranean. <b>Open Monday — the standout for the last night</b> if they want fine dining.`,
+        q:"Eleven Restaurante Lisboa" },
+      { name:"Belcanto", rate:"4.6", ct:"1774", price:"€€€€", ahead:true, monClosed:true,
+        vibe:`José Avillez's 2-Michelin flagship — "a different level." Closed Sun & Mon, so not the last night.`,
+        q:"Belcanto Lisboa" },
+      { name:"Fifty Seconds", rate:"4.8", ct:"360", price:"€€€€", ahead:true, monClosed:true,
+        vibe:`Martín Berasategui's 2-Michelin at the top of the Vasco da Gama tower — 360° river views, the romantic-view splurge. Closed Mon.`,
+        q:"Fifty Seconds Lisboa" },
+      { name:"Loco", rate:"4.7", ct:"520", price:"€€€€", ahead:true, monClosed:true,
+        vibe:`An intimate 1-Michelin tasting menu, genuinely romantic. Closed Mon.`,
+        q:"Loco Restaurante Lisboa" },
+    ] },
+
+  { group:"Where locals eat", emoji:"🦐", sub:"institutions & tascas",
+    items:[
+      { name:"Cervejaria Ramiro", rate:"4.4", ct:"20286", price:"€€€", top:true, monClosed:true,
+        vibe:`The legendary seafood beer hall — garlic prawns, percebes and clams, finished with the prego (steak sandwich); loud, no-frills, a true Lisbon institution. Closed Mon — so a Tuesday-lunch idea for H, not the couple's night.`,
+        q:"Cervejaria Ramiro Lisboa" },
+      { name:"Solar dos Presuntos", rate:"4.5", ct:"6301", price:"€€€", top:true, ahead:true,
+        vibe:`A beloved Portuguese institution by Avenida — superb seafood and classics under walls of celebrity photos. Open Mon; book.`,
+        q:"Solar dos Presuntos Lisboa" },
+      { name:"Casa do Alentejo", rate:"4.2", ct:"7947", price:"€€",
+        vibe:`Dine inside a breathtaking neo-Moorish palace courtyard — honest Alentejo regional food, and the room is the experience. Open Mon.`,
+        q:"Casa do Alentejo Lisboa" },
+      { name:"Taberna da Rua das Flores", rate:"4.3", ct:"3150", price:"€€",
+        vibe:`A tiny, beloved tasca with a hand-written daily petiscos menu — no reservations, go early or queue. Open Mon.`,
+        q:"Taberna da Rua das Flores Lisboa" },
+      { name:"A Cevicheria", rate:"4.6", ct:"9506", price:"€€",
+        vibe:`Kiko Martins' lively ceviche spot, a giant octopus on the ceiling — fun, no reservations. Open Mon.`,
+        q:"A Cevicheria Lisboa" },
+      { name:"Pinóquio", rate:"4.3", ct:"5855", price:"€€",
+        vibe:`A classic central marisqueira for shellfish and a cold beer, locals and all. Open Mon.`,
+        q:"Cervejaria Pinoquio Lisboa" },
+    ] },
+];
+
+// H's solo last day · Tue 30 Jun
+const lisbonHerDay = [
+  { group:"Coffee — the good stuff", emoji:"☕", sub:"specialty & grand cafés",
+    items:[
+      { name:"Hello Kristof", rate:"4.5", ct:"1466", price:"€€", top:true,
+        vibe:`"Fav coffee in town" — proper specialty coffee + brunch near Príncipe Real (08:45–15:45).`,
+        q:"Hello Kristof Lisboa" },
+      { name:"The Mill", rate:"4.5", ct:"2603", price:"€€",
+        vibe:`Australian-style, great coffee "while the tram passes by," same street.`,
+        q:"The Mill Lisboa cafe" },
+      { name:"Café Versailles", rate:"4.4", ct:"5064", price:"€€", top:true,
+        vibe:`A belle-époque grand café on Avenida — old-world glamour, the upscale coffee-and-pastry stop right by the shopping.`,
+        q:"Cafe Versailles Lisboa" },
+      { name:"Manteigaria", rate:"4.8", ct:"10603", price:"€",
+        vibe:`The city's best pastel de nata + a bica — the one sweet must. (Skip A Brasileira for coffee: iconic but touristy, average cup.)`,
+        q:"Manteigaria Chiado Lisboa" },
+    ] },
+
+  { group:"Boutique shopping", emoji:"🛍️", sub:"all walkable",
+    items:[
+      { name:"Avenida da Liberdade — the luxury mile", top:true,
+        vibe:`Lisbon's luxury boulevard, all walkable: <b>Chanel</b> (a shop-in-shop inside <b>STIVALI</b>, #38B), <b>Dior</b> (#85), <b>Louis Vuitton</b> (#190) — and her contemporary tier clustered at the lower end: <b>ba&sh</b> #40, <b>Sandro</b> #71, <b>Maje</b> #75, <b>Zadig & Voltaire</b> #84. Multi-brand luxury at <b>Fashion Clinic</b> (#144). Most open Mon–Sat 10–19.`,
+        q:"Avenida da Liberdade Lisboa" },
+      { name:"Príncipe Real — boutique district", rate:"4.4", ct:"1879", top:true,
+        vibe:`A 19th-c palace of Portuguese designers (Embaixada) plus the independent boutiques around the square — smaller than it looks, so go for the curated designers and the setting.`,
+        q:"Embaixada Principe Real Lisboa" },
+      { name:"A Vida Portuguesa", rate:"4.6", ct:"1134",
+        vibe:`Beautifully curated, high-quality Portuguese goods — ceramics, soaps, textiles — in Chiado.`,
+        q:"A Vida Portuguesa Lisboa" },
+      { name:"Chiado artisan boutiques",
+        vibe:`Within a few Chiado streets: <b>Claus Porto</b> (soaps & fragrance), <b>Vista Alegre</b> (fine porcelain), <b>Luvaria Ulisses</b> (a tiny handmade-glove atelier).`,
+        q:"Claus Porto Lisboa" },
+      { name:"El Corte Inglés", rate:"4.3", ct:"50094",
+        vibe:`The big department store (~10 min from Avenida) — premium & contemporary brands plus all the beauty counters (Chanel & Dior beauty) under one roof, with a tax-free desk.`,
+        q:"El Corte Ingles Lisboa" },
+    ] },
+];
+
+// Render the three Lisbon sub-sections — same grouped-card mechanic, eatRow for every item.
+[["lisbon-evening", lisbonEvening, "le"],
+ ["lisbon-eat",     lisbonEat,     "lx"],
+ ["lisbon-hila",    lisbonHerDay,  "lh"]].forEach(([wrapId, groups, key])=>{
+  const wrap = document.getElementById(wrapId);
+  if(!wrap) return;
+  groups.forEach((g,i)=>{
+    const el=document.createElement("article");
+    el.className="card"; el.style.animationDelay=(0.05+i*0.05)+"s";
+    const introBlock = g.intro ? `<div class="block"><div class="ico alt">🌄</div><div><div class="label">Good to know</div><p>${g.intro}</p></div></div>` : "";
+    el.innerHTML=`
+      <div class="card-top" role="button" tabindex="0" aria-expanded="false" aria-controls="${key}${i}" aria-label="${g.group} — see options">
+        <div class="badge" aria-hidden="true">${g.emoji}</div>
+        <div class="card-main"><h3>${g.group}</h3><div class="card-sub">${g.sub}</div></div>
+        <div class="card-toggle" aria-hidden="true">${plus}</div>
+      </div>
+      <div class="detail-wrap" id="${key}${i}"><div class="detail"><div class="detail-inner">
+        ${introBlock}
+        <div class="block"><div class="ico pick">★</div><div>
+          <div class="label">The options</div>${g.items.map(eatRow).join("")}
+        </div></div>
+      </div></div></div>`;
+    wireToggle(el);
+    wrap.appendChild(el);
+  });
+});
+
 const recap = [
   { q:`Romantic means…`, hint:`Seclusion &amp; privacy · adventure together · sunsets &amp; views · great wine &amp; food. <b>Romantic views a must.</b>` },
   { q:`Pace`, hint:`Slow &amp; unhurried.` },
@@ -924,6 +1157,10 @@ if(portoHub){ wireToggle(portoHub); }
 // Master Douro hub — same mechanic; nested See&do / Eat&drink arrays populate next iteration.
 const douroHub = document.getElementById("douro-hub");
 if(douroHub){ wireToggle(douroHub); }
+
+// Master Lisbon hub — same mechanic; no booked base (the stay is the open pick just below).
+const lisbonHub = document.getElementById("lisbon-hub");
+if(lisbonHub){ wireToggle(lisbonHub); }
 
 const TIER = { value:"Value", splurge:"Splurge", historic:"Historic" };
 const optRow = o=>`
@@ -1138,6 +1375,65 @@ async function loadToday(){
       +`<div class="wx-hours"><div class="wx-now"><div class="now-t">${ct}°</div><div class="now-l">${ce} ${cl} · now</div></div>${cells}</div>`;
   }catch(e){ /* leave the today slot empty — the daily strip still shows */ }
 }
+
+/* ----- FEEDBACK (clipboard + mailto · no backend, no third party) ----- */
+(function(){
+  const val = id => (document.getElementById(id).value || "").trim();
+  // Build the plain-text summary; omit any empty field.
+  function summary(){
+    const lines = ["— H & E's Portugal trip feedback —"];
+    let stay = val("fb-stay");
+    if(stay === "__other__") stay = val("fb-stay-other");
+    const loved = val("fb-loved"), skip = val("fb-skip"), req = val("fb-req"), from = val("fb-from");
+    if(stay)  lines.push("Lisbon stay: " + stay);
+    if(loved) lines.push("Loved: " + loved);
+    if(skip)  lines.push("Skip: " + skip);
+    if(req)   lines.push("Requests: " + req);
+    if(from)  lines.push("From: " + from);
+    return lines.join("\n");
+  }
+  const fbStaySel = document.getElementById("fb-stay"), fbStayOther = document.getElementById("fb-stay-other");
+  fbStaySel.addEventListener("change", function(){
+    const other = this.value === "__other__";
+    fbStayOther.style.display = other ? "" : "none";
+    if(other) fbStayOther.focus();
+  });
+  const confirmBox = document.getElementById("fb-confirm");
+  function showConfirm(msg){ confirmBox.textContent = msg; confirmBox.classList.add("show"); }
+
+  // Clipboard with execCommand fallback for older browsers.
+  function copyText(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      return navigator.clipboard.writeText(text).then(()=>true).catch(()=>legacyCopy(text));
+    }
+    return Promise.resolve(legacyCopy(text));
+  }
+  function legacyCopy(text){
+    const ta=document.createElement("textarea");
+    ta.value=text; ta.setAttribute("readonly","");
+    ta.style.position="absolute"; ta.style.left="-9999px";
+    document.body.appendChild(ta); ta.select();
+    let ok=false; try{ ok=document.execCommand("copy"); }catch(e){ ok=false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  document.getElementById("fb-copy").addEventListener("click", function(){
+    copyText(summary()).then(function(ok){
+      showConfirm(ok ? "✓ Copied — paste it to Gilly (WhatsApp, message, email…)"
+                     : "Couldn't copy automatically — select the text and copy it, or use Email to Gilly.");
+    });
+  });
+
+  // Email: address lives ONLY inside the mailto href, never rendered as page text.
+  document.getElementById("fb-mail").addEventListener("click", function(e){
+    e.preventDefault();
+    const subject = encodeURIComponent("Portugal trip — H & E's feedback");
+    const body = encodeURIComponent(summary());
+    window.location.href = ["mailto:", "gillyjuliet1", "@", "gmail.com",
+      "?subject=", subject, "&body=", body].join("");
+  });
+})();
 
 loadWeather();
 loadToday();
