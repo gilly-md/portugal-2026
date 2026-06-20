@@ -456,7 +456,7 @@
     </div>
   </div>
   <div id="flights"></div>
-  <p class="leg-note">Live status appears ~24h before each flight. <b>E lands Lisbon 17:55</b> — AA6844 is the <b>London→Lisbon</b> leg, so E likely connects via London (worth a glance at the ticket). H lands 20:55 (LY375, direct).</p>
+  <p class="leg-note">Live status appears ~24h before each flight. <b>E's American legs route via London</b> (AA6844 LHR→LIS in · AA7124 LIS→LHR out, BA codeshares) — so E connects through London both ways; worth a glance at his ticket. H flies El Al direct (TLV↔LIS).</p>
 
   <!-- NEXT -->
   <section class="sec-head"><span class="gem"></span><h2>Next: pick your Lisbon stay</h2><span class="rule"></span><span class="count">then we build your day-by-day</span></section>
@@ -986,15 +986,15 @@ const flights = {
   outbound: {
     label: "Outbound", dir: "🛫", date: "Tue 24 Jun 2026", head: "→ Lisbon (LIS)",
     legs: [
-      { who:"E", airline:"American", no:"AA6844", from:null,             to:"Lisbon", when:"lands", time:"17:55", codeshare:true },
-      { who:"H", airline:"El Al",    no:"LY375",  from:"Tel Aviv (TLV)", to:"Lisbon", when:"lands", time:"20:55" },
+      { who:"E", airline:"American", no:"AA6844", from:"London (LHR)", to:"Lisbon (LIS)", when:"lands", time:"17:55", codeshare:true },
+      { who:"H", airline:"El Al",    no:"LY375",  from:"Tel Aviv (TLV)", to:"Lisbon (LIS)", when:"lands", time:"20:55" },
     ],
   },
   return: {
     label: "Return", dir: "🛬", date: "Tue 30 Jun 2026", head: "from Lisbon (LIS)",
     legs: [
-      { who:"E", airline:"American", no:"AA7124", from:"Lisbon", to:null,             when:"departs", time:"07:10", codeshare:true },
-      { who:"H", airline:"El Al",    no:"LY376",  from:"Lisbon", to:"Tel Aviv (TLV)", when:"departs", time:"22:15" },
+      { who:"E", airline:"American", no:"AA7124", from:"Lisbon (LIS)", to:"London (LHR)", when:"departs", time:"07:10", codeshare:true },
+      { who:"H", airline:"El Al",    no:"LY376",  from:"Lisbon (LIS)", to:"Tel Aviv (TLV)", when:"departs", time:"22:15" },
     ],
   },
 };
