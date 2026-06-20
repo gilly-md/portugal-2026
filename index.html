@@ -212,6 +212,16 @@
   .porto-sub-h .count{font-size:.8rem;color:var(--terra-deep);font-style:italic;}
   .porto-sub-intro{color:var(--ink-soft);font-size:.95rem;margin:-2px 0 4px;text-wrap:pretty;}
   .porto-sub-intro b{color:var(--ink);}
+  /* Know-the-place guide lists */
+  .g-know{margin:6px 0 0;padding-left:18px;}
+  .g-know li{margin:0 0 8px;font-size:.94rem;}
+  .g-know li:last-child{margin-bottom:0;}
+  .g-terms,.g-foods{margin:6px 0 0;}
+  .g-terms>div,.g-foods>div{padding:7px 0;border-bottom:1px dotted rgba(27,79,138,.16);}
+  .g-terms>div:first-child,.g-foods>div:first-child{padding-top:2px;}
+  .g-terms>div:last-child,.g-foods>div:last-child{border-bottom:none;padding-bottom:0;}
+  .g-terms dt,.g-foods dt{font-weight:700;color:var(--azul-deep);font-size:.92rem;}
+  .g-terms dd,.g-foods dd{margin:2px 0 0;color:var(--ink-soft);font-size:.9rem;}
 
   /* ---------- WEATHER ---------- */
   .wx-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(84px,1fr));gap:8px;}
@@ -529,6 +539,11 @@
     </div></div></div>
   </article>
 
+  <!-- KNOW THE PLACE (collapsible · per-location good-to-know, words & food) -->
+  <section class="sec-head"><span class="gem"></span><h2>Know the place</h2><span class="rule"></span><span class="count">good to know · words · what to eat</span></section>
+  <p class="sec-intro">A pocket guide for the trip — a little etiquette, the handful of <b>words worth knowing</b>, and the <b>dishes &amp; drinks to seek out</b> in each place. Tap a card to open it.</p>
+  <div id="guide"></div>
+
   <!-- FLIGHT TRACKER -->
   <section class="sec-head"><span class="gem"></span><h2>Flight tracker</h2><span class="rule"></span><span class="count">live status · by flight no.</span></section>
   <p class="sec-intro">The four booked legs, with a <b>live-status link</b> for each and a countdown to the first wheels-down in Lisbon. Tap <b>Track live</b> on the day — the status appears once the airline loads the flight.</p>
@@ -771,24 +786,33 @@ const portoEat = [
         q:"Graham's Port Lodge Vila Nova de Gaia" },
     ] },
 
-  { group:"Wine bars", emoji:"🍷", sub:"romantic — their wine love",
-    intro:`Open late afternoon and made for two — the romantic ones fill fast, so book the ones marked.`,
+  { group:"Wine &amp; a view", emoji:"🌅", sub:"romantic — rooftops, river terraces & gardens",
+    intro:`A glass with a <b>great view</b> — rooftop, river or open garden — but still <b>romantic, not basic</b> (reviews read for both the view AND the vibe). Best at <b>golden hour</b> (late-June sunset ~21:00). Your ★ <b>Taylor's rose-garden</b> and <b>Vinum's</b> terrace (above) also fit. <b>The easiest is no walk at all — Bello Rooftop is your own hotel's roof</b> (confirmed; see below). <i>Prefer cosy &amp; indoor?</i> <b>de Lima's</b> (5.0 sommelier) or <b>Capela Incomum</b> (candlelit chapel). <span class="credit">Researched + reviews read via SerpApi, 20 Jun 2026.</span>`,
     items:[
-      { name:"de Lima's Wine Bar", rate:"5.0", ct:"279", top:true, ahead:true,
-        vibe:`Reservation-only, intimate sommelier-led tasting; warm host, beginner-friendly.`,
-        q:"de Lima's Wine Bar Porto" },
-      { name:"Capela Incomum", rate:"4.5", ct:"2055", price:"€€", top:true, ahead:true,
-        vibe:`A 19th-century chapel turned wine bar — grapevines where the saints were; tucked-away, quiet, romantic. Opens 16:30 (Sun 14:00).`,
-        q:"Capela Incomum Porto" },
-      { name:"Wine Quay Bar", rate:"4.6", ct:"1689", price:"€€", walk:true,
-        vibe:`Riverfront wine + Ribeira/Douro views — "you go for the spot." Cash only; closed Sun; opens 16:00. Across the bridge in Ribeira.`,
-        q:"Wine Quay Bar Porto" },
-      { name:"Prova", rate:"4.8", ct:"1094", price:"€€",
-        vibe:`50 wines by the glass, notable Portuguese producers.`,
-        q:"Prova Wine Food Pleasure Porto" },
-      { name:"Genuíno", rate:"4.8", ct:"660", price:"€€",
-        vibe:`Natural wine + genuinely good food, in the Art District.`,
-        q:"Genuíno Porto" },
+      { name:"Bello Rooftop", rate:"4.3", ct:"153", price:"€€", top:true, walk:true,
+        vibe:`<b>🏠 Your own hotel's rooftop</b> — confirmed: Bello is The Rebello's own roof. Douro and Dom Luís bridge views, artisanal pizzas, petiscos and cocktails — the <b>zero-logistics sunset drink</b>, you're already home. A newer spot (G4.3), and there's <b>Pot&amp;Pan</b> tapas downstairs too.`,
+        q:"Bello Rooftop The Rebello Vila Nova de Gaia" },
+      { name:"Arco das Verdades", rate:"5.0", ct:"815", price:"€€", top:true, ahead:true,
+        vibe:`<b>The romantic pick.</b> A tiny, charming wine bar tucked in the lanes by the Sé, with a <b>window table over the river and the bridge</b> — knowledgeable hosts who pick your wines, and a lovely conversation-starter concept (the "arc of truths"). Intimate <i>and</i> a view, the best of both. Book a window. Across the bridge, walkable.`,
+        q:"Arco das Verdades wine bar Porto" },
+      { name:"Bacchus vini", rate:"4.8", ct:"951", price:"€€", ahead:true,
+        vibe:`A warm <b>riverfront</b> wine bar in Ribeira — one reviewer's <b>Valentine's-night highlight</b> — with a gorgeous Douro view and an excellent guided port tasting (ask for Manuel). Small; reserve. Across the bridge, walkable.`,
+        q:"Bacchus vini Rua da Lada Porto" },
+      { name:"The Yeatman — terrace lounge", rate:"4.8", ct:"5193", walk:true,
+        vibe:`<b>The most refined river view in Gaia</b> — the 2-Michelin hotel's panoramic terrace, a sophisticated glass above the whole city (rating is the hotel's). Premium; non-guests can drink at the bar/lounge — <b>call ahead</b>. A short uphill walk from The Rebello.`,
+        q:"The Yeatman Vila Nova de Gaia" },
+      { name:"6 Ponte Sky Bar", rate:"4.6", ct:"142", price:"€€€", walk:true,
+        vibe:`<b>The fancy rooftop.</b> A polished sky bar by the bridge in Gaia with a pool and a stunning Douro panorama — "totally worth it for sundowners," fresh cocktails, a slight splurge. Walkable from The Rebello.`,
+        q:"6 Ponte Sky Bar Vila Nova de Gaia" },
+      { name:"Espaço Porto Cruz — Terrace Lounge", rate:"4.4", ct:"4012", price:"€€", walk:true,
+        vibe:`A 360° rooftop right on the Gaia waterfront — Douro, Ribeira and the bridge in front of you, with <b>port-wine cocktails</b> and complimentary snacks. Walkable along the river from The Rebello. Small &amp; popular → go for golden hour; the view's best from the rail.`,
+        q:"Espaço Porto Cruz Vila Nova de Gaia" },
+      { name:"Bite Rooftop", rate:"4.5", ct:"244", price:"€€", walk:true,
+        vibe:`A relaxed-but-lovely Gaia rooftop up the steps by the bridge — "<b>gorgeous at sunset over the river and the bridge</b>," fair prices, good small bites (you order at the bar). Quieter than the big terraces. Walkable from The Rebello.`,
+        q:"Bite Rooftop Vila Nova de Gaia" },
+      { name:"Antiqvvm", rate:"4.7", ct:"770", price:"€€€€", ahead:true,
+        vibe:`The <b>garden splurge</b> — a Michelin terrace in the Crystal Palace gardens, an exquisite garden with a sweeping Douro view; a "moments" tasting menu, not a drop-in. Book ahead; west of the centre (taxi).`,
+        q:"Antiqvvm Restaurante Porto" },
     ] },
 
   { group:"Romantic — for the vibe, not the stars", emoji:"🕯️", sub:"intimate rooms · a local's picks",
@@ -1089,8 +1113,8 @@ const lisbonEat = [
       { name:"Taberna da Rua das Flores", rate:"4.3", ct:"3150", price:"€€",
         vibe:`A tiny, beloved tasca with a hand-written daily petiscos menu — no reservations, go early or queue. Open Mon.`,
         q:"Taberna da Rua das Flores Lisboa" },
-      { name:"A Cevicheria", rate:"4.6", ct:"9506", price:"€€",
-        vibe:`Kiko Martins' lively ceviche spot, a giant octopus on the ceiling — fun, no reservations. Open Mon.`,
+      { name:"A Cevicheria", rate:"4.6", ct:"9513", price:"€€", top:true,
+        vibe:`<b>A review standout</b> — repeatedly called "the best meal we had in Lisbon": Kiko Martins' lively spot under a giant ceiling octopus, ceviche + tuna-belly crudo + prawn croquettes, everything fresh and fun. The livelier alternative to Solar dos Presuntos. <b>No reservations → go early</b> or expect a wait. Open Mon.`,
         q:"A Cevicheria Lisboa" },
       { name:"Pinóquio", rate:"4.3", ct:"5855", price:"€€",
         vibe:`A classic central marisqueira for shellfish and a cold beer, locals and all. Open Mon.`,
@@ -1191,6 +1215,115 @@ if(douroHub){ wireToggle(douroHub); }
 // Master Lisbon hub — same mechanic; no booked base (the stay is the open pick just below).
 const lisbonHub = document.getElementById("lisbon-hub");
 if(lisbonHub){ wireToggle(lisbonHub); }
+
+// ---- KNOW THE PLACE ----
+// One collapsible card per place. know = good-to-know lines; terms = [pt, en]; foods = [name, note].
+// General cultural knowledge (not venue claims) — kept accurate, no per-source anchoring needed.
+const guide = [
+  { emoji:"🇵🇹", place:"Portugal — the basics", sub:"true everywhere you go",
+    know:[
+      `<b>The couvert.</b> Bread, olives, cheese or sardine pâté arrive unasked — they're <b>not free</b>. Eat them if you want them; wave them away politely if you don't. You're only charged for what you touch.`,
+      `<b>Dinner is late.</b> Kitchens fill from ~20:00; 19:00 is early. Lunch ~13:00.`,
+      `<b>Tipping is light.</b> Rounding up or ~5–10% for good service is plenty — no US-style 20%.`,
+      `<b>Card is fine almost everywhere</b>, but keep a little cash for tascas, markets and the odd "cash only" spot.`,
+    ],
+    terms:[
+      ["Bom dia / Boa tarde","Good morning / afternoon"],
+      ["Se faz favor (s'faz favôr)","Please / excuse me"],
+      ["Obrigado / Obrigada","Thank you (m/ f speaker)"],
+      ["A conta, por favor","The bill, please"],
+      ["Saúde!","Cheers!"],
+    ],
+    foods:[
+      ["Pastel de nata","The warm custard tart — best with cinnamon and a coffee."],
+      ["Bacalhau","Salt cod, the national obsession — said to have 365 preparations."],
+      ["Bifana","A marinated pork sandwich; the great cheap, fast bite."],
+      ["Vinho verde","Young, faintly fizzy green wine — crisp and low-alcohol for a hot afternoon."],
+    ] },
+
+  { emoji:"🍷", place:"Porto & Gaia", sub:"port country, across the river",
+    know:[
+      `<b>Two banks.</b> Porto is the old city; the port lodges (Taylor's, Graham's…) are across the Douro in <b>Vila Nova de Gaia</b>, where your hotel is. The Dom Luís I bridge links them on two levels.`,
+      `<b>It's hilly.</b> Comfortable shoes; the funicular and the Gaia cable car save the legs.`,
+      `<b>Port is a fortified wine</b> — sip it; a tasting flight beats a single glass for learning the styles.`,
+    ],
+    terms:[
+      ["Um café / um cimbalino","An espresso (locals in Porto say <i>cimbalino</i>)"],
+      ["Cais","Quay / riverside — as in Cais da Ribeira"],
+      ["Tasca","A tiny family-run tavern — honest food, house wine"],
+      ["Vinho do Porto","Port wine — tawny, ruby, white or vintage"],
+    ],
+    foods:[
+      ["Francesinha","Porto's monster sandwich — cured meats, melted cheese, a beer-and-tomato sauce, often a fried egg. Split one."],
+      ["Tripas à moda do Porto","Tripe-and-bean stew — the dish that nicknamed locals <i>tripeiros</i>."],
+      ["Bacalhau (many ways)","Try it à Gomes de Sá or à Brás."],
+      ["Port styles","White port + tonic as an aperitif; tawny with dessert; a vintage to finish."],
+    ] },
+
+  { emoji:"🍇", place:"The Douro Valley", sub:"the world's oldest demarcated wine region",
+    know:[
+      `<b>Tastings are by appointment.</b> Book the quintas (estates) ahead — they're not walk-in shops.`,
+      `<b>One of you stays sober to drive</b> the winding N222, or take the river cruise / scenic train and leave the car.`,
+      `<b>Your base (Monverde) is Vinho Verde country</b>, just west of the Douro gorge — the gorge itself is a day trip, ~45 min east.`,
+    ],
+    terms:[
+      ["Quinta","A wine estate / farmhouse"],
+      ["Socalcos","The terraced vineyards cut into the hillsides"],
+      ["Rabelo","The flat-bottomed boat that once carried port downriver"],
+      ["Colheita","A single-harvest aged tawny port"],
+    ],
+    foods:[
+      ["Posta à mirandesa","A thick, char-grilled regional beef steak."],
+      ["Douro DOC reds","The same grapes as port, made dry — big, structured table wines."],
+      ["Conventual sweets","Amarante's egg-and-sugar convent pastries — <i>papos de anjo</i>, <i>São Gonçalos</i>."],
+      ["Queijo da Serra","Buttery, oozing mountain sheep's cheese."],
+    ] },
+
+  { emoji:"🌉", place:"Lisbon", sub:"fado, hills & the river light",
+    know:[
+      `<b>Fado has two homes:</b> Alfama (older, eastern) and Bairro Alto (at the top of your hotel's Glória funicular). A <i>casa de fado</i> charges a couvert/minimum — you're paying for the music.`,
+      `<b>Trams & funiculars</b> climb the hills; tap a rechargeable Viva Viagem card. The 28 tram is scenic but pickpocket-prone.`,
+      `<b>Miradouros</b> (viewpoints) are the free sunset move — a glass of wine and the river light.`,
+    ],
+    terms:[
+      ["Bica","An espresso (Lisbon slang)"],
+      ["Imperial","A small draft beer"],
+      ["Fado","The soulful, melancholic song style — UNESCO-listed"],
+      ["Saudade","Untranslatable longing — the feeling fado lives on"],
+      ["Ginjinha","Sour-cherry liqueur, drunk as a shot"],
+    ],
+    foods:[
+      ["Pastéis de Belém","The original custard tart, from the 1837 bakery — warm, by the dozen."],
+      ["Bacalhau à Brás","Salt cod scrambled with eggs, onion and straw potatoes."],
+      ["Ameijoas à Bulhão Pato","Clams in garlic, coriander and white wine."],
+      ["Ginjinha","A €1.50 shot of sour-cherry liqueur from a hole-in-the-wall — a Lisbon ritual."],
+    ] },
+];
+
+const guideWrap = document.getElementById("guide");
+if(guideWrap){
+  guide.forEach((g,i)=>{
+    const el=document.createElement("article");
+    el.className="card"; el.style.animationDelay=(0.05+i*0.05)+"s";
+    const knowBlock = `<div class="block"><div class="ico alt">💡</div><div><div class="label">Good to know</div>
+      <ul class="g-know">${g.know.map(k=>`<li>${k}</li>`).join("")}</ul></div></div>`;
+    const termsBlock = `<div class="block"><div class="ico pick">🗣️</div><div><div class="label">Words to know</div>
+      <dl class="g-terms">${g.terms.map(t=>`<div><dt>${t[0]}</dt><dd>${t[1]}</dd></div>`).join("")}</dl></div></div>`;
+    const foodsBlock = `<div class="block"><div class="ico bnb">🍽️</div><div><div class="label">Foods &amp; drinks to try</div>
+      <dl class="g-foods">${g.foods.map(f=>`<div><dt>${f[0]}</dt><dd>${f[1]}</dd></div>`).join("")}</dl></div></div>`;
+    el.innerHTML=`
+      <div class="card-top" role="button" tabindex="0" aria-expanded="false" aria-controls="g${i}" aria-label="${g.place} — good to know, words and food">
+        <div class="badge" aria-hidden="true">${g.emoji}</div>
+        <div class="card-main"><h3>${g.place}</h3><div class="card-sub">${g.sub}</div></div>
+        <div class="card-toggle" aria-hidden="true">${plus}</div>
+      </div>
+      <div class="detail-wrap" id="g${i}"><div class="detail"><div class="detail-inner">
+        ${knowBlock}${termsBlock}${foodsBlock}
+      </div></div></div>`;
+    wireToggle(el);
+    guideWrap.appendChild(el);
+  });
+}
 
 
 const recapWrap = document.getElementById("recap");
