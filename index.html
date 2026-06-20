@@ -165,6 +165,22 @@
   .choose .ht{font-size:1.15rem;line-height:1.2;color:var(--terra);flex:none;}
   .choose b{color:var(--terra-deep);}
   .istag{display:inline-flex;align-items:center;gap:5px;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-deep);background:rgba(176,74,50,.12);border:1px solid rgba(176,74,50,.3);border-radius:999px;padding:2px 9px;white-space:nowrap;}
+  /* ♥ / ✕ reactions on each option */
+  .react{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px;}
+  .rx{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:700;cursor:pointer;border-radius:999px;padding:4px 12px;background:var(--cream);color:var(--ink-soft);border:1px solid rgba(27,79,138,.28);transition:background .15s,color .15s,border-color .15s;-webkit-tap-highlight-color:transparent;}
+  .rx:hover{border-color:var(--azul);color:var(--azul-deep);}
+  .rx:focus-visible{outline:2px solid var(--azul);outline-offset:2px;}
+  .rx.love[aria-pressed="true"]{background:var(--terra);border-color:var(--terra);color:#fff;}
+  .rx.no[aria-pressed="true"]{background:var(--azul-ink);border-color:var(--azul-ink);color:#fff;}
+  .rx-why{flex:1 1 100%;min-width:0;margin-top:2px;font:inherit;font-size:.86rem;padding:7px 11px;border:1px solid rgba(27,79,138,.3);border-radius:9px;background:#fff;color:var(--ink);}
+  .rx-why:focus-visible{outline:2px solid var(--azul);outline-offset:0;border-color:var(--azul);}
+  .fb-marks{display:none;}
+  .fb-marks.show{display:block;background:linear-gradient(180deg,#fff7ec,#fdeede);border:1px solid rgba(176,74,50,.28);border-radius:12px;padding:12px 15px;margin-bottom:14px;font-size:.9rem;}
+  .fb-marks .mk-h{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-deep);font-weight:700;margin-bottom:7px;}
+  .fb-marks .mk{display:flex;gap:9px;align-items:flex-start;margin-top:5px;}
+  .fb-marks .mk-i{flex:none;font-weight:700;line-height:1.4;}
+  .fb-marks .mk-i.love{color:var(--terra);}
+  .fb-marks .mk-i.no{color:var(--azul-ink);}
   /* top pick highlight in Douro */
   .pick-tag.top{color:var(--port);background:rgba(123,47,58,.14);}
   /* walkable-from-base flag (Porto things-to-do) */
@@ -492,7 +508,7 @@
       <!-- H's solo last day (nested) -->
       <div class="porto-sub-h"><span class="pgem"></span><h3>H's solo last day · Tue 30 Jun</h3><span class="rule"></span><span class="count">coffee &amp; boutiques</span></div>
       <p class="porto-sub-intro">E flies out at dawn, so H has a full last day — the good coffee and the city's best boutique shopping, all walkable. ★ marks our pick in each group. <span class="credit">Ratings are Google, checked 20 Jun 2026.</span></p>
-      <div id="lisbon-hila"></div>
+      <div id="lisbon-solo"></div>
     </div></div></div>
   </article>
 
@@ -525,8 +541,9 @@
 
   <!-- FEEDBACK (no backend — clipboard + mailto) -->
   <section class="sec-head"><span class="gem"></span><h2>Tell Gilly what you think</h2><span class="rule"></span><span class="count">review the ideas · send it back</span></section>
-  <p class="sec-intro">Look through the ideas above, then tell us what you loved, what to skip, and anything you're dreaming of — and send it to Gilly.</p>
+  <p class="sec-intro">Tap <b>♥ Love it</b> or <b>✕ Not for us</b> on any option above — and add a line on <i>why</i> when you do. Your marks ride along automatically when you send this. Then add anything else and send it to Gilly.</p>
   <div class="fb">
+    <div class="fb-marks" id="fb-marks" aria-live="polite"></div>
     <div class="fb-grid">
       <div class="fb-field">
         <label for="fb-stay">Which Lisbon stay?</label>
@@ -719,6 +736,15 @@ const portoTodo = [
     ] },
 ];
 
+// Shared helpers for the ♥/✕ reaction control (used by both todoRow and eatRow).
+const rslug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const rname = s => s.replace(/&/g,"&amp;").replace(/"/g,"&quot;");
+const reactBar = o=>`
+    <div class="react" data-key="${rslug(o.name)}" data-name="${rname(o.name)}">
+      <button type="button" class="rx love" data-v="love" aria-pressed="false" aria-label="Love ${rname(o.name)}">♥ <span>Love it</span></button>
+      <button type="button" class="rx no" data-v="no" aria-pressed="false" aria-label="Not for us — ${rname(o.name)}">✕ <span>Not for us</span></button>
+      <input type="text" class="rx-why" maxlength="140" hidden aria-label="Say why — ${rname(o.name)}">
+    </div>`;
 const todoRow = o=>`
   <div class="pick-row${o.ahead?' ahead':''}">
     <div class="pick-h">
@@ -729,6 +755,7 @@ const todoRow = o=>`
       ${o.walk?`<span class="pick-tag walk">🚶 walkable from The Rebello</span>`:``}
     </div>
     <p class="pick-b">${o.vibe} <a class="maplink" target="_blank" rel="noopener" href="${M(o.q)}">${pin} Maps</a></p>
+    ${reactBar(o)}
   </div>`;
 
 const todoWrap = document.getElementById("porto-todo");
@@ -787,6 +814,26 @@ const portoEat = [
       { name:"Genuíno", rate:"4.8", ct:"660", price:"€€",
         vibe:`Natural wine + genuinely good food, in the Art District.`,
         q:"Genuíno Porto" },
+    ] },
+
+  { group:"Romantic — for the vibe, not the stars", emoji:"🕯️", sub:"intimate rooms · a local's picks",
+    intro:`<b>Food and the feeling of the room beat the stars.</b> Alongside the Michelin tables below, these are the intimate, owner-run spots a Porto local recommends for a romantic night — chosen for warmth and what's on the plate, not awards. <b>Why a tasca?</b> A <i>tasca</i> is a tiny family-run Portuguese tavern: paper tablecloths, a hand-written daily menu, dishes cooked by whoever's in the kitchen out back, honest house wine, and a room small enough that the owner knows your name by dessert. No theatre — just generous food, and for a slow romantic evening often the night you remember most. <span class="credit">Picks from portoalities (local guide), cross-checked live on Google, 20 Jun 2026.</span>`,
+    items:[
+      { name:"Flor dos Congregados", rate:"4.5", ct:"818", price:"€€", top:true, ahead:true,
+        vibe:`<b>The tasca pick.</b> A family kitchen in a centuries-old house down a lane off Congregados — vaulted stone, a short hand-written menu, slow-cooked Portuguese classics. The candle-lit, intimate Porto dinner. Tiny → book. Dinner from 19:00; closed Sun.`,
+        q:"Flor dos Congregados Porto" },
+      { name:"Piccolo Camafeu", rate:"4.8", ct:"568", top:true, ahead:true,
+        vibe:`A tiny, owner-run little room on Praça Carlos Alberto — simple, perfect pasta and the warmest service in the city (4.8 across 568 is no fluke). Intimate enough for two; <b>book ahead</b>, it's small. Evenings from 18:30. <i>(Listed as "Camafeu" in the guide; the real spot is this intimate Italian, not Portuguese.)</i>`,
+        q:"Piccolo Camafeu Praça Carlos Alberto Porto" },
+      { name:"Belos Aires", rate:"4.6", ct:"1430", price:"€€",
+        vibe:`Argentine warmth in the centre across the river — Malbec and meat that melts, a friendly buzzy room. A change of pace from port-and-petiscos. Closed Sun; open from 15:00, dinner till 22:00.`,
+        q:"Belos Aires Rua José Falcão Porto" },
+      { name:"Wish", rate:"4.5", ct:"1032", price:"€€€",
+        vibe:`Polished Japanese by the church in Foz — a large but calm, low-lit room; sushi plus a wide menu. A seaside-suburb dinner (~15 min west of the river).`,
+        q:"Wish Restaurante Sushi Largo da Igreja da Foz Porto" },
+      { name:"Bocca", rate:"4.1", ct:"2379", price:"€€",
+        vibe:`Italian right on the Foz seafront — the play here is a <b>window table at sunset over the Atlantic</b> (~21:00 in late June). The 4.1 says food is solid, not stellar; come for the light and the view. Book a window.`,
+        q:"Restaurante Bocca Passeio Alegre Foz Porto" },
     ] },
 
   { group:"Romantic dinners", emoji:"🥂", sub:"most closed Sun & Mon",
@@ -863,6 +910,7 @@ const eatRow = o=>`
       ${o.walk?`<span class="pick-tag walk">🚶 walkable from The Rebello</span>`:``}
     </div>
     <p class="pick-b">${o.vibe} <a class="maplink" target="_blank" rel="noopener" href="${M(o.q)}">${pin} Maps</a></p>
+    ${reactBar(o)}
   </div>`;
 
 const eatWrap = document.getElementById("porto-eat");
@@ -1109,7 +1157,7 @@ const lisbonHerDay = [
 // Render the three Lisbon sub-sections — same grouped-card mechanic, eatRow for every item.
 [["lisbon-evening", lisbonEvening, "le"],
  ["lisbon-eat",     lisbonEat,     "lx"],
- ["lisbon-hila",    lisbonHerDay,  "lh"]].forEach(([wrapId, groups, key])=>{
+ ["lisbon-solo",    lisbonHerDay,  "lh"]].forEach(([wrapId, groups, key])=>{
   const wrap = document.getElementById(wrapId);
   if(!wrap) return;
   groups.forEach((g,i)=>{
@@ -1376,6 +1424,51 @@ async function loadToday(){
   }catch(e){ /* leave the today slot empty — the daily strip still shows */ }
 }
 
+/* ----- REACTIONS (♥ / ✕ per option · localStorage · feeds the feedback) ----- */
+const RKEY = "pt2026react";
+let rstate = {};
+try{ rstate = JSON.parse(localStorage.getItem(RKEY) || "{}"); }catch(_){ rstate = {}; }
+function rsave(){ try{ localStorage.setItem(RKEY, JSON.stringify(rstate)); }catch(_){} }
+window.collectReactions = function(){
+  const love = [], no = [];
+  Object.values(rstate).forEach(r=>{ if(r.v==="love") love.push(r); else if(r.v==="no") no.push(r); });
+  return { love, no };
+};
+function rfmt(arr){ return arr.map(r=> r.why ? `${r.name} — "${r.why}"` : r.name).join("; "); }
+function updateMarks(){
+  const box = document.getElementById("fb-marks"); if(!box) return;
+  const { love, no } = window.collectReactions();
+  if(!love.length && !no.length){ box.innerHTML = ""; box.classList.remove("show"); return; }
+  box.classList.add("show");
+  box.innerHTML =
+    `<div class="mk-h">Included automatically with your feedback:</div>` +
+    (love.length ? `<div class="mk"><span class="mk-i love">♥</span><div><b>Loved (${love.length}):</b> ${rfmt(love)}</div></div>` : "") +
+    (no.length   ? `<div class="mk"><span class="mk-i no">✕</span><div><b>Not for us (${no.length}):</b> ${rfmt(no)}</div></div>` : "");
+}
+document.querySelectorAll(".react").forEach(box=>{
+  const key = box.dataset.key, name = box.dataset.name;
+  const why = box.querySelector(".rx-why");
+  const btns = box.querySelectorAll(".rx");
+  function paint(){
+    const cur = rstate[key] ? rstate[key].v : null;
+    btns.forEach(b=> b.setAttribute("aria-pressed", String(b.dataset.v === cur)));
+    if(cur){
+      why.hidden = false;
+      why.placeholder = cur==="love" ? "What makes it right for you? (optional)" : "What puts you off? (optional)";
+      why.value = rstate[key].why || "";
+    } else { why.hidden = true; }
+  }
+  btns.forEach(b=> b.addEventListener("click", ()=>{
+    const v = b.dataset.v;
+    if(rstate[key] && rstate[key].v === v){ delete rstate[key]; }          // tap again to clear
+    else { rstate[key] = { v, name, why: (rstate[key] && rstate[key].why) || "" }; }
+    rsave(); paint(); updateMarks();
+  }));
+  why.addEventListener("input", ()=>{ if(rstate[key]){ rstate[key].why = why.value.trim(); rsave(); updateMarks(); } });
+  paint();
+});
+updateMarks();
+
 /* ----- FEEDBACK (clipboard + mailto · no backend, no third party) ----- */
 (function(){
   const val = id => (document.getElementById(id).value || "").trim();
@@ -1386,8 +1479,11 @@ async function loadToday(){
     if(stay === "__other__") stay = val("fb-stay-other");
     const loved = val("fb-loved"), skip = val("fb-skip"), req = val("fb-req"), from = val("fb-from");
     if(stay)  lines.push("Lisbon stay: " + stay);
-    if(loved) lines.push("Loved: " + loved);
-    if(skip)  lines.push("Skip: " + skip);
+    const rx = window.collectReactions ? window.collectReactions() : {love:[],no:[]};
+    if(rx.love.length) lines.push("♥ Loved: " + rx.love.map(r=> r.why?`${r.name} (${r.why})`:r.name).join("; "));
+    if(rx.no.length)   lines.push("✕ Not for us: " + rx.no.map(r=> r.why?`${r.name} (${r.why})`:r.name).join("; "));
+    if(loved) lines.push("Also loved: " + loved);
+    if(skip)  lines.push("Also skip: " + skip);
     if(req)   lines.push("Requests: " + req);
     if(from)  lines.push("From: " + from);
     return lines.join("\n");
