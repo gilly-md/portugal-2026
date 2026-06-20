@@ -384,7 +384,7 @@
       </svg>
       <div class="eyebrow">A Romantic Escape · Porto · Douro · Lisboa</div>
       <h1>Portugal,<br><em>for two</em></h1>
-      <p class="sub">Six nights along the north — Porto's riverside, the vineyards of the Douro, and a little Lisbon light. Late June, unhurried, and built around the two of you. <b>Porto and the Douro are booked</b> — the only stay left to pick is your Lisbon airport-night, and we'll build the day-by-day around them.</p>
+      <p class="sub">Six nights along the north — Porto's riverside, the vineyards of the Douro, and a little Lisbon light. Late June, unhurried, and built around the two of you. <b>All three bases are booked</b> — Porto, the Douro and Lisbon — so now we build the day-by-day around them.</p>
       <div class="facts">
         <span class="fact"><span>🗓️</span><b>24 – 30 June 2026</b></span>
         <span class="fact"><span>💙</span>For H &amp; E</span>
@@ -495,7 +495,7 @@
     </div></div></div>
   </article>
 
-  <!-- LISBON HUB (collapsible · no booked base — stay still open) -->
+  <!-- LISBON HUB (collapsible · base is booked) -->
   <article class="card" id="lisbon-hub">
     <div class="card-top" role="button" tabindex="0" aria-expanded="false" aria-controls="lisbon-hub-detail" aria-label="Lisbon — your airport bookend: a romantic last evening and a bonus solo day">
       <div class="badge" aria-hidden="true">🌉</div>
@@ -1067,7 +1067,7 @@ douroEat.forEach((g,i)=>{
 });
 
 // ---- LISBON ----
-// Lisbon has no booked base (the stay is the one still-open pick, just below).
+// Lisbon base is booked (HOTEL HOTEL) — same hub mechanic as Porto/Douro.
 // Three nested sub-sections, all rendered with eatRow (handles rate/ct/price/ahead/monClosed,
 // and degrades gracefully when rate & price are both absent). top:true = our pick.
 
@@ -1232,7 +1232,7 @@ if(portoHub){ wireToggle(portoHub); }
 const douroHub = document.getElementById("douro-hub");
 if(douroHub){ wireToggle(douroHub); }
 
-// Master Lisbon hub — same mechanic; no booked base (the stay is the open pick just below).
+// Master Lisbon hub — same mechanic; base is booked (HOTEL HOTEL).
 const lisbonHub = document.getElementById("lisbon-hub");
 if(lisbonHub){ wireToggle(lisbonHub); }
 
